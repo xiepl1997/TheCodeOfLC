@@ -402,40 +402,40 @@ public class LeetCodes {
 	}
 
 	/**
-	 * 19 删除链表的倒数第N个节点
-	 * 尝试循环一遍
+	 * 19 删除链表的倒数第N个节点(一遍循环)，用双指针
 	 * @param head
 	 * @param n
 	 * @return
 	 */
 	public ListNode removeNthFromEnd(ListNode head, int n) {
-		ListNode listNode = head;
-		ListNode p;
-		int len = 0;
-		while(listNode != null) {
-			len ++;
-			listNode = listNode.next;
-		}
-		if(len == 1)
+		ListNode i = head;
+		ListNode j = head;
+		if(head == null)
 			return null;
-		if(n == len)
+		for(int a = 0; a < n; a++){
+			j = j.next;
+		}
+		if(j == null){
 			return head.next;
-		listNode = head;
-		if(n == 1) {
-			while(listNode.next.next != null) {
-				listNode = listNode.next;
-			}
 		}
-		
-		int point = len - n;
-		
-		for(int i = 0; i < point; i++) {
-			listNode = listNode.next;
+		while(j.next != null){
+			i = i.next;
+			j = j.next;
 		}
-		return listNode;
+		if(n == 1){
+			i.next = null;
+		}
+		else{
+			i.next = i.next.next;
+		}
+		return head;
     }
-	
-	//20.有效的括号
+
+	/**
+	 * 20 有效的括号
+	 * @param s
+	 * @return
+	 */
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<Character>();
         int len = s.length();
