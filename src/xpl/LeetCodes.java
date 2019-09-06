@@ -113,8 +113,46 @@ public class LeetCodes {
 		return maxlen;
 	}
 
+	/**
+	 * 5 最长回文子串， 马拉车算法
+	 * @param s
+	 * @return
+	 */
+	public String longestPalindrome(String s) {
+		int mi = 0;
+		int right = 0;
+		int maxlength = 0;
+		int maxpoint = 0;
+		String temp = "@#";
+		for(int i = 0; i < s.length(); i++){
+			temp += s.charAt(i);
+			temp += "#";
+		}
+		temp += "*";
 
-	
+		int[] p = new int[temp.length()];
+		for(int i = 0; i < temp.length(); i++){
+			p[i] = 0;
+		}
+		for(int i = 1; i < temp.length()-1; i++){
+			p[i] = right > i? Math.min(p[2*mi-i], right - i) : 1;
+			while(temp.charAt(i+p[i]) == temp.charAt(i-p[i])){
+				p[i]++;
+			}
+			if(i + p[i] > right){
+				right = i + p[i];
+				mi = i;
+			}
+			if(maxlength < p[i]){
+				maxlength = p[i];
+				maxpoint = i;
+			}
+		}
+		//(maxpoint - maxlength)/2为最长回文数的起始点，maxlength为最长回文数的长度
+		return s.substring((maxpoint - maxlength)/2, (maxpoint - maxlength)/2 + maxlength - 1);
+
+	}
+
 	//6 Z型变化
 	public String convert(String s, int numRows) {
         String result = "";
