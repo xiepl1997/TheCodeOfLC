@@ -637,6 +637,38 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 59 螺旋矩阵二
+	 * @param n
+	 * @return
+	 */
+	public int[][] generateMatrix(int n) {
+		int temp = 0;
+		int[][] result = new int[n][n];
+		if(n == 0)
+			return result;
+		int up = 0, down = n-1, left = 0, right = n-1;
+		while(true){
+			for(int i = left; i <= right; i++)
+				result[up][i] = ++temp;
+			if(++up > down)
+				break;
+			for(int i = up; i <= down; i++)
+				result[i][right] = ++temp;
+			if(--right < left)
+				break;
+			for(int i = right; i >= left; i--)
+				result[down][i] = ++temp;
+			if(--down < up)
+				break;
+			for(int i = down; i >= up; i--)
+				result[i][left] = ++temp;
+			if(++left > right)
+				break;
+		}
+		return result;
+	}
+
+	/**
 	 * 62 不同路径，m*n矩阵中左上角到右下角的路径数量
 	 * @param m
 	 * @param n
