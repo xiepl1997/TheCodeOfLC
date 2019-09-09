@@ -581,6 +581,24 @@ public class LeetCodes {
 
 	}
 
+    /**
+     * 53.最大子序和
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
+        int sum = 0;
+        int result = nums[0];
+        for(int i = 0; i < nums.length; i++){
+        	if(sum > 0)
+        		sum += nums[i]; //若当前值为正数，则继续加
+        	else
+        		sum = nums[i]; //若当前值为负数，则取当前值也比（负数+当前值）更大
+			result = Math.max(result, sum);
+		}
+        return result;
+    }
+
 	/**
 	 * 62 不同路径，m*n矩阵中左上角到右下角的路径数量
 	 * @param m
