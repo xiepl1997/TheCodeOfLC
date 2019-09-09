@@ -695,6 +695,43 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 66 加一
+	 * @param digits
+	 * @return
+	 */
+	public int[] plusOne(int[] digits) {
+		if(digits.length == 0)
+			return new int[]{1};
+		int len = digits.length - 1;
+		int t = 1;
+		int flag = 0;
+		while(t != 0){
+			if(digits[len]+t >= 10){
+				digits[len] = (digits[len]+t)%10;
+				if(len == 0){
+					t = 0;
+					flag = 1;
+				}
+			}
+			else{
+				digits[len]++;
+				t = 0;
+			}
+			len--;
+		}
+		if(flag == 0)
+			return digits;
+		else{
+			int[] a = new int[digits.length+1];
+			a[0] = 1;
+			for(int i = 1; i < digits.length+1; i++){
+				a[i] = digits[i-1];
+			}
+			return a;
+		}
+	}
+
+	/**
 	 * 69 求平方根，牛顿迭代
 	 * @param x
 	 * @return
