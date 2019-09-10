@@ -751,6 +751,29 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 67 二进制求和
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public String addBinary(String a, String b) {
+		StringBuilder ans = new StringBuilder();
+		int p = 0;
+		for(int i = a.length()-1,j = b.length()-1; i >= 0 || j >= 0; i--,j--){
+			int sum = p;
+			if(i >= 0)
+				sum += a.charAt(i)-'0';
+			if(j >= 0)
+				sum += b.charAt(j)-'0';
+			ans.append(sum%2);
+			p = sum/2;
+		}
+		if(p == 1)
+			ans.append(1);
+		return ans.reverse().toString();
+	}
+
+	/**
 	 * 69 求平方根，牛顿迭代
 	 * @param x
 	 * @return
