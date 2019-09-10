@@ -637,6 +637,25 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 55 跳跃游戏
+	 * @param nums
+	 * @return
+	 */
+	public boolean canJump(int[] nums) {
+		int len = nums.length;
+
+	}
+
+	/**
+	 * 56 合并区间
+	 * @param intervals
+	 * @return
+	 */
+	public int[][] merge(int[][] intervals) {
+
+	}
+
+	/**
 	 * 59 螺旋矩阵二
 	 * @param n
 	 * @return
@@ -799,6 +818,89 @@ public class LeetCodes {
 			}
 		}
 	}
+
+	/**
+	 * 79 单词搜索 dfs
+	 * @param board
+	 * @param word
+	 * @return
+	 */
+	int[][] b;
+	public boolean exist(char[][] board, String word) {
+		int m = board[0].length;
+		int n = board.length;
+		b = new int[n][m];
+		int index = 0;
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < m; j++){
+				if(board[i][j] == word.charAt(0)){
+					for(int k = 0; k < n; k++)
+						for(int l = 0; l < m; l++)
+							b[k][l] = 0;
+					b[i][j] = 1;
+					if(dfs(board, word, 0, i, j)){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	public boolean dfs(char[][] board, String word, int index, int i, int j){
+		if(index == word.length()-1 && word.charAt(index) == board[i][j])
+			return true;
+		if(index == word.length()-1 && word.charAt(index) != board[i][j])
+			return false;
+		//上
+		if(i > 0 && b[i-1][j]==0){
+			if(board[i-1][j] == word.charAt(index+1) ){
+				b[i-1][j] = 1;
+				if(dfs(board, word, index+1, i-1, j))
+					return true;
+				b[i-1][j] = 0;
+			}
+		}
+		//下
+		if(i < board.length-1 && b[i+1][j]==0){
+			if(board[i+1][j] == word.charAt(index+1) ) {
+				b[i+1][j] = 1;
+				if (dfs(board, word, index + 1, i + 1, j))
+					return true;
+				b[i+1][j] = 0;
+			}
+		}
+		//左
+		if(j > 0 && b[i][j-1]==0){
+			if(board[i][j-1] == word.charAt(index+1) ){
+				b[i][j-1] = 1;
+				if(dfs(board, word, index+1, i, j-1))
+					return true;
+				b[i][j-1] = 0;
+			}
+		}
+		//右
+		if(j < board[0].length-1 && b[i][j+1]==0){
+			if(board[i][j+1] == word.charAt(index+1)){
+				b[i][j+1] = 1;
+				if(dfs(board, word, index+1, i, j+1))
+					return true;
+				b[i][j+1] = 0;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 215 数组中的第k大的数
+	 * @param nums
+	 * @param k
+	 * @return
+	 */
+	public int findKthLargest(int[] nums, int k) {
+		Arrays.sort(nums);
+		return nums[nums.length - k];
+	}
+
 }
 class ListNode {
     int val;
