@@ -481,9 +481,14 @@ public class LeetCodes {
         
         return true;
     }
-    
-    //21 合并两个有序链表
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+	/**
+	 * 21 合并两个有序链表
+	 * @param l1
+	 * @param l2
+	 * @return
+	 */
+	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
     	ListNode listNode;
     	if(l1 == null)
     		return l2;
@@ -499,6 +504,15 @@ public class LeetCodes {
     	}
     	return listNode;
     }
+
+	/**
+	 * 22 括号生成
+	 * @param n
+	 * @return
+	 */
+	public List<String> generateParenthesis(int n) {
+
+	}
 
 	/**
 	 * 26 删除排序数组中的重复项
@@ -554,6 +568,53 @@ public class LeetCodes {
 //	}
 
 	/**
+	 * 31 下一个排列
+	 * 从右往左找到第一对nums[i]>nums[i-1]，然后再从最右边往前找，找到第一个大于nums[i-1]的元素nums[j]，交换nums[i-1]和nums[j]，
+	 * 最后再将nums[i-1]之后的元素反转。
+	 * @param nums
+	 */
+	public void nextPermutation(int[] nums) {
+		int i = nums.length-1;
+		int flag = 0; //用于标记序列是否是全降序，0是，1不是
+		for(; i > 0; i--){
+			if(nums[i] > nums[i-1]){
+				i--;
+				flag = 1;
+				break;
+			}
+		}
+		if(flag == 1) {
+			int j = nums.length - 1;
+			for (; j >= 0; j--) {
+				if (nums[j] > nums[i]) {
+					int temp = nums[j];
+					nums[j] = nums[i];
+					nums[i] = temp;
+					break;
+				}
+			}
+			for (int k = i + 1, l = nums.length - 1; k < nums.length; k++, l--) {
+				if (k > (i + nums.length) / 2) {
+					break;
+				}
+				int temp = nums[k];
+				nums[k] = nums[l];
+				nums[l] = temp;
+			}
+		}
+		else{
+			for(int k = 0,l = nums.length-1; k < nums.length; k++, l--){
+				if(k > (nums.length-1)/2){
+					break;
+				}
+				int temp = nums[k];
+				nums[k] = nums[l];
+				nums[l] = temp;
+			}
+		}
+	}
+
+	/**
 	 * 35 搜索插入位置，使用二分法
 	 * @param nums
 	 * @param target
@@ -578,6 +639,15 @@ public class LeetCodes {
 			}
 		}
 		return left;
+
+	}
+
+	/**
+	 * 46 全排列
+	 * @param nums
+	 * @return
+	 */
+	public List<List<Integer>> permute(int[] nums) {
 
 	}
 
@@ -771,6 +841,16 @@ public class LeetCodes {
 		if(p == 1)
 			ans.append(1);
 		return ans.reverse().toString();
+	}
+
+	/**
+	 * 68 文本左右对齐
+	 * @param words
+	 * @param maxWidth
+	 * @return
+	 */
+	public List<String> fullJustify(String[] words, int maxWidth) {
+
 	}
 
 	/**
