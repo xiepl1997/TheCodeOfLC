@@ -853,6 +853,31 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 64 最小路径和
+	 * @param grid
+	 * @return
+	 */
+	public int minPathSum(int[][] grid) {
+		if(grid.length == 0)
+			return 0;
+		//辅助二维数组
+		int[][] r = new int[grid.length][grid[0].length];
+		r[0][0] = grid[0][0];
+		for(int i = 1; i < r.length; i++){
+			r[i][0] += grid[i][0] + r[i-1][0];
+		}
+		for(int i = 1; i < r[0].length; i++){
+			r[0][i] += grid[0][i] + r[0][i-1];
+		}
+		for(int i = 1; i < r.length; i++){
+			for(int j = 1; j < r[0].length; j++){
+				r[i][j] += grid[i][j]+Math.min(r[i-1][j],r[i][j-1]);
+			}
+		}
+		return r[r.length-1][r[0].length-1];
+	}
+
+	/**
 	 * 66 加一
 	 * @param digits
 	 * @return
