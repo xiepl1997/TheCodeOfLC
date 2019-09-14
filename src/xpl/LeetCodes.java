@@ -813,6 +813,46 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 63 不同路径2（有障碍物）
+	 * @param obstacleGrid
+	 * @return
+	 */
+	public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+		if(obstacleGrid.length == 0)
+			return 0;
+		int[][] r = new int[obstacleGrid.length][obstacleGrid[0].length];
+		for(int i = 0; i < r.length; i++){
+			if(obstacleGrid[i][0] != 1)
+				r[i][0] = 1;
+			else{
+				for(int j = i; j < r.length; j++)
+					r[j][0] = 0;
+				break;
+			}
+		}
+		for(int i = 0; i < r[0].length; i++){
+			if(obstacleGrid[0][i] != 1)
+				r[0][i] = 1;
+			else{
+				for(int j = i; j < r[0].length; j++)
+					r[0][i] = 0;
+				break;
+			}
+		}
+		for(int i = 1; i < r.length; i++){
+			for(int j = 1; j < r[0].length; j++){
+				if(obstacleGrid[i][j] != 1){
+					r[i][j] = r[i-1][j]+r[i][j-1];
+				}
+				else{
+					r[i][j] = 0;
+				}
+			}
+		}
+		return r[obstacleGrid.length-1][obstacleGrid[0].length-1];
+	}
+
+	/**
 	 * 66 加一
 	 * @param digits
 	 * @return
