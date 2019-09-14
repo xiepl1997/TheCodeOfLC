@@ -726,6 +726,35 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 58 最后一个单词的长度
+	 * @param s
+	 * @return
+	 */
+	public int lengthOfLastWord(String s) {
+		if(s.length() == 0)
+			return 0;
+		int len = s.length();
+		int result = 0;
+		int flag = 0;
+		for(int i = len-1; i >= 0; i--){
+			if(flag == 1){
+				if(s.charAt(i) != ' ') {
+					result ++;
+				}
+				else{
+					break;
+				}
+			}
+			//从末尾第一次遇到非空格字符标记flag
+			if(flag == 0 && s.charAt(i) != ' '){
+				flag = 1;
+				result ++;
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * 59 螺旋矩阵二
 	 * @param n
 	 * @return
@@ -920,6 +949,39 @@ public class LeetCodes {
 				}
 			}
 		}
+	}
+
+	/**
+	 * 74 搜索二维矩阵
+	 * @param matrix
+	 * @param target
+	 * @return
+	 */
+	public boolean searchMatrix(int[][] matrix, int target) {
+		for(int i = 0; i < matrix.length; i++){
+			if(matrix[i].length == 0)
+				continue;
+			if(matrix[i][0] <= target && matrix[i][matrix[0].length] >= target){
+				return judge(matrix[i], target);
+			}
+		}
+		return false;
+	}
+	//二分法
+	public boolean judge(int[] list, int target){
+		int left = 0, right = list.length - 1, m = 0;
+		while(left <= right){
+			m = (left + right)/2;
+			if(list[m] == target)
+				return true;
+			else if(list[m] > target){
+				right = m - 1;
+			}
+			else if(list[m] < target){
+				left = m + 1;
+			}
+		}
+		return false;
 	}
 
 	/**
