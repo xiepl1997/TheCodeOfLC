@@ -510,9 +510,9 @@ public class LeetCodes {
 	 * @param n
 	 * @return
 	 */
-	public List<String> generateParenthesis(int n) {
-
-	}
+//	public List<String> generateParenthesis(int n) {
+//
+//	}
 
 	/**
 	 * 26 删除排序数组中的重复项
@@ -647,9 +647,9 @@ public class LeetCodes {
 	 * @param nums
 	 * @return
 	 */
-	public List<List<Integer>> permute(int[] nums) {
-
-	}
+//	public List<List<Integer>> permute(int[] nums) {
+//
+//	}
 
     /**
      * 53.最大子序和
@@ -711,19 +711,19 @@ public class LeetCodes {
 	 * @param nums
 	 * @return
 	 */
-	public boolean canJump(int[] nums) {
-		int len = nums.length;
-
-	}
+//	public boolean canJump(int[] nums) {
+//		int len = nums.length;
+//
+//	}
 
 	/**
 	 * 56 合并区间
 	 * @param intervals
 	 * @return
 	 */
-	public int[][] merge(int[][] intervals) {
-
-	}
+//	public int[][] merge(int[][] intervals) {
+//
+//	}
 
 	/**
 	 * 58 最后一个单词的长度
@@ -943,9 +943,9 @@ public class LeetCodes {
 	 * @param maxWidth
 	 * @return
 	 */
-	public List<String> fullJustify(String[] words, int maxWidth) {
-
-	}
+//	public List<String> fullJustify(String[] words, int maxWidth) {
+//
+//	}
 
 	/**
 	 * 69 求平方根，牛顿迭代
@@ -1121,6 +1121,25 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 83 删除排序列表中的相同元素
+	 * @param head
+	 * @return
+	 */
+	public ListNode deleteDuplicates(ListNode head) {
+		if(head == null || head.next == null)
+			return head;
+		ListNode l = head;
+		while(l.next != null){
+			if(l.val == l.next.val){
+				l.next = l.next.next;
+				continue;
+			}
+			l = l.next;
+		}
+		return head;
+	}
+
+	/**
 	 * 215 数组中的第k大的数
 	 * @param nums
 	 * @param k
@@ -1129,6 +1148,27 @@ public class LeetCodes {
 	public int findKthLargest(int[] nums, int k) {
 		Arrays.sort(nums);
 		return nums[nums.length - k];
+	}
+
+	/**
+	 * 997 小镇的法官
+	 * @param N
+	 * @param trust
+	 * @return
+	 */
+	public int findJudge(int N, int[][] trust) {
+		int[] val1 = new int[N]; //每个人被相信的次数
+		int[] val2 = new int[N]; //每个人相信别人的次数
+		for(int i = 0;i < trust.length; i++){
+			val1[trust[i][1]-1]++;
+			val2[trust[i][0]-1]++;
+		}
+		for(int i = 0; i < N; i++){
+			if(val1[i] == N-1 && val2[i] == 0){
+				return i+1;
+			}
+		}
+		return -1;
 	}
 
 }
