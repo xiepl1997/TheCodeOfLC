@@ -1140,6 +1140,59 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 88 合并两个有序数组
+	 * @param nums1
+	 * @param m
+	 * @param nums2
+	 * @param n
+	 */
+	public void merge(int[] nums1, int m, int[] nums2, int n) {
+		System.arraycopy(nums2, 0, nums1, m, n);
+		Arrays.sort(nums1);
+	}
+
+    /**
+     * 136 只出现一次的数字，要求时间复杂度在0(n)，除了一个只出现一次的数之外，其他的数都出现了两次，所以使用异或来计算整个数组，两个相同的数异或肯定是0，而与0异或则是其本身，
+     * 所以最后异或的结果就是只出现一次的那个数
+     * @param nums
+     * @return
+     */
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        for(int i = 0; i < nums.length; i++){
+            result = result ^ nums[i];
+        }
+        return result;
+    }
+
+	/**
+	 * 152 最大乘积和
+	 * @param nums
+	 * @return
+	 */
+	public int maxProduct(int[] nums) {
+		if(nums.length == 0)
+			return 0;
+		int max = nums[0];
+		for(int i = 1; i < nums.length; i++){
+			if(max * nums[i] < 0){
+
+			}
+		}
+		return max;
+	}
+
+    /**
+     * 169 求众数
+     * @param nums
+     * @return
+     */
+    public int majorityElement(int[] nums) {
+		Arrays.sort(nums);
+		return nums[nums.length/2];
+    }
+
+	/**
 	 * 215 数组中的第k大的数
 	 * @param nums
 	 * @param k
@@ -1148,6 +1201,41 @@ public class LeetCodes {
 	public int findKthLargest(int[] nums, int k) {
 		Arrays.sort(nums);
 		return nums[nums.length - k];
+	}
+
+	/**
+	 * 240 搜索二维矩阵2
+	 * 从矩阵的左上角开始搜索，如果当前值大，则向下继续寻找，否则向左寻找
+	 * @param matrix
+	 * @param target
+	 * @return
+	 */
+	public boolean searchMatrix2(int[][] matrix, int target) {
+		if(matrix == null || matrix.length == 0 || matrix[0].length == 0){
+			return false;
+		}
+		int i = 0, j = matrix[0].length - 1;
+		while(i < matrix.length && j >= 0){
+			if(matrix[i][j] == target)
+				return true;
+			if(matrix[i][j] < target){
+				i++;
+			}
+			else{
+				j--;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 887 鸡蛋掉落
+	 * @param K
+	 * @param N
+	 * @return
+	 */
+	public int superEggDrop(int K, int N) {
+
 	}
 
 	/**
