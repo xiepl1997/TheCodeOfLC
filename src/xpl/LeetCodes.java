@@ -250,7 +250,7 @@ public class LeetCodes {
 
 	/**
 	 * 11盛水最多的容器
-	 * @param height
+	 * @param
 	 * @return
 	 */
 //	public int maxArea(int[] height) {
@@ -963,7 +963,7 @@ public class LeetCodes {
 	}
 
 	/**
-	 * 70 爬楼梯， 斐波那契数列
+	 * 70 爬楼梯， 斐波那契数列, 剪纸
 	 * @param n
 	 * @return
 	 */
@@ -1151,6 +1151,36 @@ public class LeetCodes {
 		Arrays.sort(nums1);
 	}
 
+	/**
+	 * 125 验证回文串
+	 * @param s
+	 * @return
+	 */
+	public static boolean isPalindrome(String s) {
+		if(s == null)
+			return true;
+		s = s.toLowerCase();
+		StringBuilder sb = new StringBuilder("#");
+		for(int i = 0; i < s.length(); i++){
+			if((s.charAt(i) >= 'a' && s.charAt(i) <= 'z')||(s.charAt(i) >= '0' && s.charAt(i) <= '9')){
+				sb.append(s.charAt(i));
+				sb.append("#");
+			}
+		}
+		System.out.println(sb.toString());
+		String str = sb.toString();
+		int m = str.length()/2;
+		int i = 1;
+		while(i <= m){
+			if(str.charAt(m-i) == str.charAt(m+i)){
+				i++;
+			}
+			else
+				return false;
+		}
+		return true;
+	}
+
     /**
      * 136 只出现一次的数字，要求时间复杂度在0(n)，除了一个只出现一次的数之外，其他的数都出现了两次，所以使用异或来计算整个数组，两个相同的数异或肯定是0，而与0异或则是其本身，
      * 所以最后异或的结果就是只出现一次的那个数
@@ -1234,9 +1264,9 @@ public class LeetCodes {
 	 * @param N
 	 * @return
 	 */
-	public int superEggDrop(int K, int N) {
-
-	}
+//	public int superEggDrop(int K, int N) {
+//
+//	}
 
 	/**
 	 * 997 小镇的法官
@@ -1257,6 +1287,10 @@ public class LeetCodes {
 			}
 		}
 		return -1;
+	}
+
+	public static void main(String[] args) {
+		boolean t = isPalindrome("A man, a plan, a canal: Panama");
 	}
 
 }
