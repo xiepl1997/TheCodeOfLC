@@ -1181,6 +1181,15 @@ public class LeetCodes {
 		return true;
 	}
 
+	/**
+	 * 131 分割回文串
+	 * @param s
+	 * @return
+	 */
+	public List<List<String>> partition(String s) {
+
+	}
+
     /**
      * 136 只出现一次的数字，要求时间复杂度在0(n)，除了一个只出现一次的数之外，其他的数都出现了两次，所以使用异或来计算整个数组，两个相同的数异或肯定是0，而与0异或则是其本身，
      * 所以最后异或的结果就是只出现一次的那个数
@@ -1194,6 +1203,30 @@ public class LeetCodes {
         }
         return result;
     }
+
+	/**
+	 * 139 单词拆分，动态规划，dp[i]表示s的前i个字符能否被worddict拆分
+	 * @param s
+	 * @param wordDict
+	 * @return
+	 */
+	public boolean wordBreak(String s, List<String> wordDict) {
+		return word_Break(s, new HashSet<>(wordDict), 0, new Boolean[s.length()]);
+	}
+	public boolean word_Break(String s, Set<String> wordDict, int start, Boolean[] panduan){
+		if(start == s.length())
+			return true;
+		if(panduan[start] != null) {
+			return panduan[start];
+		}
+		for(int end = start + 1; end <= s.length(); end++){
+			if(wordDict.contains(s.substring(start, end)) && word_Break(s, wordDict, end, panduan)){
+				return panduan[start] = true;
+			}
+		}
+		return panduan[start] = false;
+	}
+
 
 	/**
 	 * 152 最大乘积和
