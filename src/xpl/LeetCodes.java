@@ -393,6 +393,37 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 16 最接近的三数和
+	 * @param nums
+	 * @param target
+	 * @return
+	 */
+	public int threeSumClosest(int[] nums, int target) {
+		Arrays.sort(nums);
+		int min = 0x3f3f3f3f;
+		int result = 0;
+		for(int k = 0; k < nums.length-2; k++){
+			int i = k + 1, j = nums.length - 1;
+			while(i < j){
+				int s = nums[k] + nums[i] + nums[j];
+				//如果三数和大于target，就将j--
+				if(s > target){
+					while(i < j && nums[j] == nums[--j]);
+				}
+				else if(s < target){
+					while(i < j && nums[i] == nums[++i]);
+				}
+				else{
+					return s;
+				}
+				result = min > Math.abs(s - target) ? s : result;
+				min = Math.min(min, Math.abs(s - target));
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * 17 电话号码的组合，采用递归
 	 * @param digits
 	 * @return
