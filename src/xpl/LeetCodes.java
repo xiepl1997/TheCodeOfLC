@@ -1,5 +1,6 @@
 package xpl;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import javax.xml.transform.Templates;
@@ -356,6 +357,40 @@ public class LeetCodes {
         }
         return result;
     }
+
+	/**
+	 * 15 三数之和，三指针
+	 * @param nums
+	 * @return
+	 */
+	public List<List<Integer>> threeSum(int[] nums) {
+		Arrays.sort(nums);
+		List<List<Integer>> result = new ArrayList<>();
+		for(int k = 0; k < nums.length-2; k++){
+			int i = k + 1, j = nums.length - 1;
+			if(nums[k] > 0){
+				break;
+			}
+			else if(k > 0 && nums[k] == nums[k-1]){
+				continue;
+			}
+			while(i < j){
+				int s = nums[k] + nums[i] + nums[j];
+				if(s > 0){
+					while(i < j && nums[j] == nums[--j]);
+				}
+				else if(s < 0){
+					while(i < j && nums[i] == nums[++i]);
+				}
+				else{
+					result.add(new ArrayList<Integer>(Arrays.asList(nums[k], nums[i], nums[j])));
+					while(i < j && nums[i] == nums[++i]);
+					while(i < j && nums[j] == nums[--j]);
+				}
+			}
+		}
+		return result;
+	}
 
 	/**
 	 * 17 电话号码的组合，采用递归
@@ -1186,9 +1221,9 @@ public class LeetCodes {
 	 * @param s
 	 * @return
 	 */
-	public List<List<String>> partition(String s) {
-
-	}
+//	public List<List<String>> partition(String s) {
+//
+//	}
 
     /**
      * 136 只出现一次的数字，要求时间复杂度在0(n)，除了一个只出现一次的数之外，其他的数都出现了两次，所以使用异或来计算整个数组，两个相同的数异或肯定是0，而与0异或则是其本身，
@@ -1205,7 +1240,7 @@ public class LeetCodes {
     }
 
 	/**
-	 * 139 单词拆分，动态规划，dp[i]表示s的前i个字符能否被worddict拆分
+	 * 139 单词拆分，
 	 * @param s
 	 * @param wordDict
 	 * @return
