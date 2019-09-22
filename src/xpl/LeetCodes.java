@@ -393,7 +393,7 @@ public class LeetCodes {
 	}
 
 	/**
-	 * 16 最接近的三数和
+	 * 16 最接近的三数和，三指针
 	 * @param nums
 	 * @param target
 	 * @return
@@ -1295,20 +1295,27 @@ public class LeetCodes {
 
 
 	/**
-	 * 152 最大乘积和
+	 * 152 乘积最大子序列
 	 * @param nums
 	 * @return
 	 */
 	public int maxProduct(int[] nums) {
 		if(nums.length == 0)
 			return 0;
+		if(nums.length == 1)
+			return nums[0];
 		int max = nums[0];
+		int result = -0x3f3f3f3f;
 		for(int i = 1; i < nums.length; i++){
-			if(max * nums[i] < 0){
-
+			if(max * nums[i] > max){
+				max = max * nums[i];
 			}
+			else{
+				max = nums[i];
+			}
+			result = Math.max(result, max);
 		}
-		return max;
+		return result;
 	}
 
     /**
@@ -1330,6 +1337,28 @@ public class LeetCodes {
 	public int findKthLargest(int[] nums, int k) {
 		Arrays.sort(nums);
 		return nums[nums.length - k];
+	}
+
+	/**
+	 * 217 存在重复元素
+	 * @param nums
+	 * @return
+	 */
+	public boolean containsDuplicate(int[] nums) {
+		Map<Integer, Integer> map = new HashMap<>();
+		for(int i = 0; i < nums.length; i++){
+			if(!map.containsKey(nums[i])){
+				map.put(nums[i], 1);
+			}
+			else{
+				map.put(nums[i], map.get(nums[i])+1);
+			}
+		}
+		for(int a : map.keySet()){
+			if(map.get(a) > 1)
+				return true;
+		}
+		return false;
 	}
 
 	/**
@@ -1355,6 +1384,75 @@ public class LeetCodes {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * 283 移动0，将所有的0放到后面且不影响其他的
+	 * @param nums
+	 */
+	public void moveZeroes(int[] nums) {
+//			方法1 ：o(n^2)复杂度，仿照冒泡排序
+//		for(int i = 0; i < nums.length-1; i++) {
+//			for (int j = 0; j < nums.length - 1 - i; j++) {
+//				if (nums[j] == 0) {
+//					int temp = nums[j];
+//					nums[j] = nums[j + 1];
+//					nums[j + 1] = temp;
+//				}
+//			}
+//		}
+//			方法2 双指针
+			int i = 0, j = 0;
+			while(j < nums.length){
+				if(nums[j] != 0){
+					nums[i] = nums[j];
+					i++;
+				}
+				j++;
+			}
+			for(; i < nums.length; i++){
+				nums[i] = 0;
+			}
+	}
+
+	/**
+	 * 344 反转字符串，原地修改数组
+	 * @param s
+	 */
+	public void reverseString(char[] s) {
+		if(s == null || s.length == 0)
+			return;
+		int left = 0, right = s.length - 1;
+		while(left < right){
+			char temp = s[left];
+			s[left] = s[right];
+			s[right] = temp;
+			left++;
+			right--;
+		}
+	}
+
+	/**
+	 * 387 字符串中第一个唯一字符
+	 * @param s
+	 * @return
+	 */
+	public int firstUniqChar(String s) {
+		int result = -1;
+		Map<Character, Integer> map = new HashMap<Character, Integer>();
+		for(int i = 0; i < s.length(); i++){
+			if(!map.containsKey(s.charAt(i))){
+				map.put(s.charAt(i), 1);
+			}
+			else{
+				map.put(s.charAt(i), map.get(s.charAt(i))+1);
+			}
+		}
+		for(int i = 0; i < s.length(); i++){
+			if(map.get(s.charAt(i)) == 1)
+				return i;
+		}
+		return result;
 	}
 
 	/**
