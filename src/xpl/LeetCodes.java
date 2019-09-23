@@ -360,6 +360,9 @@ public class LeetCodes {
 
 	/**
 	 * 15 三数之和，三指针
+	 * 思路：首先对数组进行排序利用三指针。k指针遍历每一个元素，i和j分别指向nums[k]的后面部分的起始端和结尾端，判断
+	 * s=nums[k]+nums[i]+nums[j]是否等于0，如果s=0，则将结果添加到list中，如果s<0，则说明nums[i]+[j]的值过小，则需要将
+	 * i++，以此来提高num[i]的值；如果s>0，则说明nums[i]+nums[j]的值过大，需要将j--，以此来减小nums[j]的值。
 	 * @param nums
 	 * @return
 	 */
