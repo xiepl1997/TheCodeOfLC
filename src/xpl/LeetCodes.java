@@ -1303,20 +1303,33 @@ public class LeetCodes {
 	 * @return
 	 */
 	public int maxProduct(int[] nums) {
-		if(nums.length == 0)
-			return 0;
-		if(nums.length == 1)
-			return nums[0];
-		int max = nums[0];
-		int result = -0x3f3f3f3f;
+//		if(nums.length == 0)
+//			return 0;
+//		if(nums.length == 1)
+//			return nums[0];
+//		int max = nums[0];
+//		int result = -0x3f3f3f3f;
+//		for(int i = 1; i < nums.length; i++){
+//			if(max * nums[i] > max){
+//				max = max * nums[i];
+//			}
+//			else{
+//				max = nums[i];
+//			}
+//			result = Math.max(result, max);
+//		}
+//		return result;
+
+		//因为一个绝对值很大的负数乘上一个负数（整数）是会变成很大的正数，所以要计算出数组中的最大乘积和最小乘积
+		int[] p = new int[nums.length];
+		int[] n = new int[nums.length];
+		p[0] = nums[0];
+		n[0] = nums[0];
+		int result = nums[0];
 		for(int i = 1; i < nums.length; i++){
-			if(max * nums[i] > max){
-				max = max * nums[i];
-			}
-			else{
-				max = nums[i];
-			}
-			result = Math.max(result, max);
+			p[i] = Math.max(nums[i], Math.max(p[i-1]*nums[i], n[i-1]*nums[i]));
+			n[i] = Math.min(nums[i], Math.min(p[i-1]*nums[i], n[i-1]*nums[i]));
+			result = Math.max(result, p[i]);
 		}
 		return result;
 	}
@@ -1390,6 +1403,42 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 242 有效的字母异位词
+	 * @param s
+	 * @param t
+	 * @return
+	 */
+	public static boolean isAnagram(String s, String t) {
+		Map<Character, Integer> map1 = new HashMap<>();
+		Map<Character, Integer> map2 = new HashMap<>();
+		for(int i = 0; i < s.length(); i++){
+			if(!map1.containsKey(s.charAt(i))){
+				map1.put(s.charAt(i), 1);
+			}
+			else{
+				map1.put(s.charAt(i), map1.get(s.charAt(i))+1);
+			}
+		}
+		for(int i = 0; i < t.length(); i++){
+			if(!map2.containsKey(t.charAt(i))){
+				map2.put(t.charAt(i), 1);
+			}
+			else{
+				map2.put(t.charAt(i), map2.get(t.charAt(i))+1);
+			}
+		}
+//		if(map1.size() != map2.size())
+//			return false;
+		for(Character c : map1.keySet()){
+			if(!map2.containsKey(c))
+				return false;
+			if(!map1.get(c).equals(map2.get(c)))
+				return false;
+		}
+		return true;
+	}
+
+	/**
 	 * 283 移动0，将所有的0放到后面且不影响其他的
 	 * @param nums
 	 */
@@ -1404,7 +1453,7 @@ public class LeetCodes {
 //				}
 //			}
 //		}
-//			方法2 双指针
+//			方法2 双指针，O(n)
 			int i = 0, j = 0;
 			while(j < nums.length){
 				if(nums[j] != 0){
@@ -1490,7 +1539,11 @@ public class LeetCodes {
 	}
 
 	public static void main(String[] args) {
-		boolean t = isPalindrome("A man, a plan, a canal: Panama");
+		String a = "aaaaaaaaaaab";
+		String b = "baaaaaaaaaaa";
+		boolean t = isAnagram(a, b);
+		System.out.println(t);
+
 	}
 
 }
