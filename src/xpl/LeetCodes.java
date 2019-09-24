@@ -1468,6 +1468,32 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 334 递增的三元子序列
+	 * 分析：初始化a、b为无穷大，然后遍历nums数组，首先判断nums[i]是否小于a，如果小于a，则a=nums[i]，否则与b比较，如果比b小，则
+	 * b=nums[i]，否则返回true。b若被赋值，说明在b这个值之前肯定有比b小的数。当nums[i]小于被赋值的b时，就说明存在递增的三元子序列
+	 * @param nums
+	 * @return
+	 */
+	public boolean increasingTriplet(int[] nums) {
+		int len = nums.length;
+		if(len < 3)
+			return false;
+		int a = Integer.MAX_VALUE;
+		int b = Integer.MAX_VALUE;
+		for(int i = 0; i < nums.length; i++){
+			if(nums[i] <= b){
+				b = nums[i];
+			}
+			else if(nums[i]	<= a){
+				a = nums[i];
+			}
+			else
+				return true;
+		}
+		return false;
+	}
+
+	/**
 	 * 344 反转字符串，原地修改数组
 	 * @param s
 	 */
