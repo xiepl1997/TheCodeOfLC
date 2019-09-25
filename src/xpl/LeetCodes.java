@@ -1345,6 +1345,32 @@ public class LeetCodes {
     }
 
 	/**
+	 * 204 计算质数，厄拉多赛筛法求素数
+	 * @param n
+	 * @return
+	 */
+	public int countPrimes(int n) {
+		int[] flag = new int[n];
+		for(int i = 0; i < n; i++){
+			flag[i] = 1;
+		}
+		int result = 0;
+		for(int i = 2; i < n; i++){
+			//如果当前值为素数
+			if(flag[i] == 1){
+				for(int j = 2; j*i < n; j++){
+					flag[j*i] = 0;
+				}
+			}
+		}
+		for(int i = 2; i < Math.sqrt(n); i++){
+			if(flag[i] == 1)
+				result++;
+		}
+		return result;
+	}
+
+	/**
 	 * 215 数组中的第k大的数
 	 * @param nums
 	 * @param k
@@ -1375,6 +1401,23 @@ public class LeetCodes {
 				return true;
 		}
 		return false;
+	}
+
+	/**
+	 * 238 除自身以外数组的乘积
+	 * @param nums
+	 * @return
+	 */
+	public int[] productExceptSelf(int[] nums) {
+		int t = 1;
+		int[] result = new int[nums.length];
+		for(int i = 0; i < nums.length; i++){
+			t *= nums[i];
+		}
+		for(int i = 0; i < nums.length; i++){
+			result[i] = t/nums[i];
+		}
+		return result;
 	}
 
 	/**
@@ -1604,10 +1647,7 @@ public class LeetCodes {
 	}
 
 	public static void main(String[] args) {
-		String a = "aaaaaaaaaaab";
-		String b = "baaaaaaaaaaa";
-		boolean t = isAnagram(a, b);
-		System.out.println(t);
+		System.out.println(countPrimes(10));
 
 	}
 
