@@ -1363,7 +1363,7 @@ public class LeetCodes {
 				}
 			}
 		}
-		for(int i = 2; i < Math.sqrt(n); i++){
+		for(int i = 2; i < n; i++){
 			if(flag[i] == 1)
 				result++;
 		}
