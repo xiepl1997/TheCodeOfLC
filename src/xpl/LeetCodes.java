@@ -629,12 +629,45 @@ public class LeetCodes {
 	 * @param needle
 	 * @return
 	 */
-//	public int strStr(String haystack, String needle) {
-//		if(needle == null){
-//			return 0;
-//		}
-//
-//	}
+	public int strStr(String haystack, String needle) {
+		if(needle == null || needle.length() == 0){
+			return 0;
+		}
+		if(haystack.length() < needle.length()){
+			return -1;
+		}
+		int s = 0;
+		int e = 0;
+		for(int i = 0; i < haystack.length(); i++){
+			if(haystack.charAt(i) == needle.charAt(0)){
+				if(needle.length() == 1)
+					return 0;
+				if(i == haystack.length()-1){
+					if(needle.length() == 1){
+						return i;
+					}
+					else{
+						return -1;
+					}
+				}
+				s = 0;
+				for(int j = i+1; ; j++){
+					if(j == haystack.length() || s+1 == needle.length())
+						return -1;
+					if(haystack.charAt(j) == needle.charAt(++s)){
+						if(s == needle.length()-1){
+							return i;
+						}
+					}
+					else{
+						break;
+					}
+				}
+			}
+		}
+		return -1;
+
+	}
 
 	/**
 	 * 31 下一个排列
@@ -719,6 +752,33 @@ public class LeetCodes {
 //	public List<List<Integer>> permute(int[] nums) {
 //
 //	}
+
+	/**
+	 * 48 旋转图像，首先将上下对调，再将矩阵左上角到右下角对角交换
+	 * @param matrix
+	 */
+	public void rotate(int[][] matrix) {
+		int n = matrix.length;
+		int s = 0, e = n-1;
+		while(s < e){
+			for(int i = 0; i < n; i++){
+				int temp = matrix[s][i];
+				matrix[s][i] = matrix[e][i];
+				matrix[e][i] = temp;
+			}
+			s++;
+			e--;
+		}
+		for(int i = 0; i < n; i++){
+			for(int j = i+1; j < n; j++){
+				int temp = matrix[i][j];
+				matrix[i][j] = matrix[j][i];
+				matrix[j][i] = temp;
+			}
+
+		}
+
+	}
 
     /**
      * 53.最大子序和
