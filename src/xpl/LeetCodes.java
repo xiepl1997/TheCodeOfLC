@@ -745,13 +745,43 @@ public class LeetCodes {
 	}
 
 	/**
-	 * 46 全排列
+	 * 46 全排列，采用回溯算法，深度搜索寻找所有结果
 	 * @param nums
 	 * @return
 	 */
-//	public List<List<Integer>> permute(int[] nums) {
-//
-//	}
+	public List<List<Integer>> permute(int[] nums) {
+		List<List<Integer>> res = new ArrayList<>();
+		if(nums.length == 0){
+			return res;
+		}
+		boolean[] flag = new boolean[nums.length];
+		dfs(nums, res, new Stack<Integer>(), flag, 0);
+		return res;
+	}
+
+	/**
+	 *
+	 * @param nums
+	 * @param res 结果集
+	 * @param stack 单个结果
+	 * @param flag 访问标记
+	 * @param index 开始下标
+	 */
+	public void dfs(int[] nums, List<List<Integer>> res, Stack<Integer> stack, boolean[] flag, int index){
+		if(index == nums.length){
+			res.add(new ArrayList<>(stack));
+			return;
+		}
+		for(int i = 0; i < nums.length; i++){
+			if(flag[i] != true){
+				stack.push(nums[i]);
+				flag[i] = true;
+				dfs(nums, res, stack, flag, index + 1);
+				flag[i] = false; //状态重置
+				stack.pop();
+			}
+		}
+	}
 
 	/**
 	 * 48 旋转图像，首先将上下对调，再将矩阵左上角到右下角对角交换
@@ -778,6 +808,16 @@ public class LeetCodes {
 
 		}
 
+	}
+
+	/**
+	 * 50 pow(x, y)，计算x的y次幂
+	 * @param x
+	 * @param n
+	 * @return
+	 */
+	public double myPow(double x, int n) {
+		return Math.pow(x, n);
 	}
 
     /**
