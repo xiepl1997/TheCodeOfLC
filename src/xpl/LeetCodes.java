@@ -784,6 +784,42 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 47 全排列2，返回所有不重复的全排列
+	 * 回溯+减枝，与46题的区别在于：1.首先对nums数组进行排序，在dfs中
+	 * @param nums
+	 * @return
+	 */
+	public static List<List<Integer>> permuteUnique(int[] nums) {
+		List<List<Integer>> res = new ArrayList<>();
+		if(nums.length == 0)
+			return res;
+		boolean[] flag = new boolean[nums.length];
+		Arrays.sort(nums);
+		dfs_47(nums, res, new Stack<Integer>(), flag, 0);
+		return res;
+	}
+
+	public static void dfs_47(int[] nums, List<List<Integer>> res, Stack<Integer> stack, boolean[] flag, int index){
+		if(index == nums.length){
+			res.add(new ArrayList<>(stack));
+			return;
+		}
+		for(int i = 0; i < nums.length; i++){
+			//和全排列的区别在于这里，每次判断是否是与前一个数相同，若与前一个数相同，则直接跳过。避免重复
+			if(i != 0 && nums[i] == nums[i-1]){
+				continue;
+			}
+			if(flag[i] != true){
+				stack.push(nums[i]);
+				flag[i] = true;
+				dfs_47(nums, res, stack, flag, index + 1);
+				flag[i] = false; // 状态重置
+				stack.pop();
+			}
+		}
+	}
+
+	/**
 	 * 48 旋转图像，首先将上下对调，再将矩阵左上角到右下角对角交换
 	 * @param matrix
 	 */
@@ -1747,8 +1783,12 @@ public class LeetCodes {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(countPrimes(10));
-
+		List<List<Integer>> list = permuteUnique(new int[]{1,1,2});
+		for(int i = 0; i < list.size(); i++){
+			for(List<Integer> l : list){
+				System.out.println(l);
+			}
+		}
 	}
 
 }
