@@ -806,10 +806,13 @@ public class LeetCodes {
 		}
 		for(int i = 0; i < nums.length; i++){
 			//和全排列的区别在于这里，每次判断是否是与前一个数相同，若与前一个数相同，则直接跳过。避免重复
-			if(i != 0 && nums[i] == nums[i-1]){
-				continue;
-			}
+//			if(i != 0 && nums[i] == nums[i-1]){
+//				continue;
+//			}
 			if(flag[i] != true){
+				if(i != 0 && nums[i] == nums[i-1] && flag[i-1] == false){
+					continue;
+				}
 				stack.push(nums[i]);
 				flag[i] = true;
 				dfs_47(nums, res, stack, flag, index + 1);
