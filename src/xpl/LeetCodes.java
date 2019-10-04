@@ -739,6 +739,44 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 34 在排序数组中查找元素的第一个和最后一个位置
+	 * @param nums
+	 * @param target
+	 * @return
+	 */
+	public int[] searchRange(int[] nums, int target) {
+		if(nums.length == 0){
+			return new int[]{-1,-1};
+		}
+		if(nums.length == 1 && nums[0] == target){
+			return new int[]{0,0};
+		}
+		else if(nums.length == 1){
+			return new int[]{-1,-1};
+		}
+		int left = 0;
+		int right = nums.length;
+		while(left < right){
+			int m = (left + right)/2;
+			if(nums[m] == target){
+				int l = m, r = m;
+				while(--l > 0 && nums[l] == target);
+				while(++r < nums.length && nums[r] == target);
+				l++;
+				r--;
+				return new int[]{l, r};
+			}
+			else if(nums[m] > target){
+				right = m - 1;
+			}
+			else if(nums[m] < target){
+				left = m + 1;
+			}
+		}
+		return new int[]{-1, -1};
+	}
+
+	/**
 	 * 35 搜索插入位置，使用二分法
 	 * @param nums
 	 * @param target
