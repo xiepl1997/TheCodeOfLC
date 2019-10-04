@@ -154,13 +154,35 @@ public class LeetCodes {
 
 	}
 
-	//6 Z型变化
+	/**
+	 * 6 Z型变换
+	 * @param s
+	 * @param numRows
+	 * @return
+	 */
 	public String convert(String s, int numRows) {
-        String result = "";
-        
-        
-        
-        return result;
+        if(numRows == 1){
+        	return s;
+		}
+        List<StringBuilder> list = new ArrayList<>();
+        for(int i = 0; i < numRows; i++){
+        	list.add(new StringBuilder());
+		}
+        int flag = -1;
+        int j = 0;
+        for(int i = 0; i < s.length(); i++){
+        	list.get(j).append(s.charAt(i));
+        	if(j == 0 || j == numRows-1){
+        		flag = -flag;
+			}
+        	j += flag;
+		}
+        String str = "";
+        for(int i = 0; i < list.size(); i++){
+        	str += list.get(i).toString();
+		}
+
+        return str;
     }
 	
 	//7_整数反转
