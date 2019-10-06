@@ -606,6 +606,33 @@ public class LeetCodes {
 //	}
 
 	/**
+	 * 24 两两交换链表中的节点
+	 * @param head
+	 * @return
+	 */
+	public ListNode swapPairs(ListNode head) {
+		if(head == null || head.next == null){
+			return head;
+		}
+		ListNode p1 = head.next;
+		head.next = p1.next;
+		p1.next = head;
+		head = p1;
+		p1 = p1.next.next;
+		ListNode p2 = head.next;
+		ListNode temp = null;
+		while(p1 != null && p1.next != null){
+			temp = p1.next;
+			p1.next = p1.next.next;
+			temp.next = p1;
+			p2.next = temp;
+			p2 = temp.next;
+			p1 = p1.next;
+		}
+		return head;
+	}
+
+	/**
 	 * 26 删除排序数组中的重复项
 	 * @param nums
 	 * @return
@@ -801,6 +828,15 @@ public class LeetCodes {
 			}
 		}
 		return left;
+
+	}
+
+	/**
+	 * 36 有效的数独
+	 * @param board
+	 * @return
+	 */
+	public boolean isValidSudoku(char[][] board) {
 
 	}
 
