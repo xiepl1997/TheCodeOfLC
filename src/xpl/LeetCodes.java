@@ -1789,6 +1789,35 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 384 打乱数组（洗牌算法）
+	 * @param nums
+	 */
+	int[] nums = null;
+	int[] nums_old = null;
+	public void Solution(int[] nums) {
+		this.nums = nums;
+		this.nums_old = Arrays.copyOf(nums, nums.length);
+	}
+
+	/** Resets the array to its original configuration and return it. */
+	public int[] reset() {
+		return this.nums_old;
+	}
+
+	/** Returns a random shuffling of the array. */
+	public int[] shuffle() {
+		int len = this.nums.length;
+		Random random = new Random();
+		for(int i = len-1; i >= 1; i--){
+			int s = random.nextInt(i+1);
+			int temp = nums[i];
+			nums[i] = nums[s];
+			nums[s] = temp;
+		}
+		return nums;
+	}
+
+	/**
 	 * 387 字符串中第一个唯一字符
 	 * @param s
 	 * @return
