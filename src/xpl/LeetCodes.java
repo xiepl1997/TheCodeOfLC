@@ -1569,6 +1569,46 @@ public class LeetCodes {
 		return result;
 	}
 
+	/**
+	 * 155 最小栈
+	 * 维护一个最小值min，每次push的时候比较元素是否比min小，若小则将min更新，每次push都push两次，多push的一次就是将当前的
+	 * min添加到栈中，每次出栈都出两次
+	 */
+	/** initialize your data structure here. */
+	List<Integer> list;
+	int min;
+	public void MinStack() {
+		list = new ArrayList<>();
+		min = Integer.MAX_VALUE;
+	}
+
+	public void push(int x) {
+		if(list.size() == 0){
+			min = Integer.MAX_VALUE;
+		}
+		else{
+			min = list.get(list.size()-1);
+		}
+		list.add(x);
+		if(min > x){
+			min = x;
+		}
+		list.add(min);
+	}
+
+	public void pop() {
+		list.remove(list.size()-1);
+		list.remove(list.size()-1);
+	}
+
+	public int top() {
+		return list.get(list.size()-2);
+	}
+
+	public int getMin() {
+		return list.get(list.size()-1);
+	}
+
     /**
      * 169 求众数
      * @param nums
@@ -1786,6 +1826,69 @@ public class LeetCodes {
 			left++;
 			right--;
 		}
+	}
+
+	/**
+	 * 349 两个数组的交集
+	 * 输出结果中的每个元素一定是唯一的
+	 * 可以不考虑输出结果的顺序
+	 * @param nums1
+	 * @param nums2
+	 * @return
+	 */
+	public int[] intersection(int[] nums1, int[] nums2) {
+		List<Integer> t = new ArrayList<>();
+		List<Integer> g = new ArrayList<>();
+		for(int i = 0; i < nums1.length; i++){
+			t.add(nums1[i]);
+		}
+		for(int i = 0; i < nums2.length; i++){
+			if(t.contains(nums2[i]) && !g.contains(nums2[i])){
+				g.add(nums2[i]);
+			}
+		}
+		int[] r = new int[g.size()];
+		for(int i = 0; i < g.size(); i++){
+			r[i] = g.get(i);
+		}
+		return r;
+	}
+
+	/**
+	 * 350 两个数组的交集Ⅱ
+	 * 输出结果中每个元素出现的次数，应该与元素在两个数组中出现的次数一致
+	 * 可以不考虑输出结果的顺序
+	 * @param nums1
+	 * @param nums2
+	 * @return
+	 */
+	public int[] intersect(int[] nums1, int[] nums2) {
+		Map<Integer, Integer> map = new HashMap<>();
+		List<Integer> list = new ArrayList<>();
+		for(int i = 0; i < nums1.length; i++){
+			if(!map.containsKey(nums1[i])){
+				map.put(nums1[i], 1);
+			}
+			else{
+				map.put(nums1[i], map.get(nums1[i])+1);
+			}
+		}
+		for(int i = 0; i < nums2.length; i++){
+			if(map.containsKey(nums2[i])){
+				list.add(nums2[i]);
+				if(map.get(nums2[i])-1 == 0){
+					map.remove(nums2[i]);
+				}
+				else{
+					map.put(nums2[i], map.get(nums2[i])-1);
+				}
+			}
+		}
+		int[] r = new int[list.size()];
+		for(int i = 0; i < list.size(); i++){
+			r[i] = list.get(i);
+		}
+		return r;
 	}
 
 	/**
