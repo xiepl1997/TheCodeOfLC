@@ -1620,6 +1620,16 @@ public class LeetCodes {
     }
 
 	/**
+	 * 181 超过经理收入的员工
+	 */
+	//select e.Name Employee from Employee e where e.Salary > (select Salary from Employee b where b.Id = e.ManagerId)
+
+	/**
+	 * 182 查找重复的电子邮箱
+	 */
+	//select Email from Person group by Email having count(*)>1
+
+	/**
 	 * 204 计算质数，厄拉多赛筛法求素数
 	 * @param n
 	 * @return
@@ -1783,6 +1793,22 @@ public class LeetCodes {
 			for(; i < nums.length; i++){
 				nums[i] = 0;
 			}
+	}
+
+	/**
+	 * 295 数据流的中位数
+	 */
+	/** initialize your data structure here. */
+	ListNode listNode;
+	public void MedianFinder() {
+	}
+
+	public void addNum(int num) {
+
+	}
+
+	public double findMedian() {
+
 	}
 
 	/**
