@@ -1456,6 +1456,24 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 100 相同的树
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public boolean isSameTree(TreeNode p, TreeNode q) {
+		if(p == null && q == null){
+			return true;
+		}
+		if(p != null && q != null && p.val == q.val){
+			return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+		}
+		else{
+			return false;
+		}
+	}
+
+	/**
 	 * 125 验证回文串
 	 * @param s
 	 * @return
@@ -1628,6 +1646,25 @@ public class LeetCodes {
 	 * 182 查找重复的电子邮箱
 	 */
 	//select Email from Person group by Email having count(*)>1
+
+	/**
+	 * 183 从不订购的客户
+	 */
+	/*
+	# Write your MySQL query statement below
+	select Name Customers from Customers c where c.Id not in(select o.CustomerId from Orders o)
+	 */
+
+	/**
+	 * 184 部门工资最高的员工
+	 */
+	/*
+	# Write your MySQL query statement below
+	select d.name Department,e.name Employee,e.Salary
+	from Employee e, Department d
+	where e.DepartmentId = d.Id
+	and (e.Salary, e.DepartmentId) in (select max(Salary), DepartmentId from Employee group by DepartmentId)
+	 */
 
 	/**
 	 * 204 计算质数，厄拉多赛筛法求素数
@@ -2049,10 +2086,26 @@ public class LeetCodes {
 	}
 
 }
+
+/**
+ * 链表节点定义
+ */
 class ListNode {
     int val;
   	ListNode next;
  	ListNode(int x) { val = x; }
+}
+
+/**
+ * 二叉树节点定义
+ */
+class TreeNode{
+	int val;
+	TreeNode left;
+	TreeNode right;
+	TreeNode(int x){
+		val = x;
+	}
 }
 
 
