@@ -1527,6 +1527,52 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 103 二叉树的锯齿形层次遍历, 使用双端队列
+	 * @param root
+	 * @return
+	 */
+	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+		List<List<Integer>> result = new ArrayList<>();
+		if(root == null)
+			return result;
+		//Queue<TreeNode> queue = new LinkedList<>();
+		Deque<TreeNode> deque = new ArrayDeque<>();
+		deque.offerFirst(root);
+		int flag = 1;
+		while(!deque.isEmpty()){
+			int count = deque.size();
+			List<Integer> temp = new ArrayList<>();
+			while(count -- != 0){
+				if(flag == 1){
+					TreeNode t = deque.peekFirst();
+					if(t.left != null){
+						deque.offerLast(t.left);
+					}
+					if(t.right != null){
+						deque.offerLast(t.right);
+					}
+					temp.add(t.val);
+					deque.pollFirst();
+				}
+				else{
+					TreeNode t = deque.peekLast();
+					if(t.right != null){
+						deque.offerFirst(t.right);
+					}
+					if(t.left != null){
+						deque.offerFirst(t.left);
+					}
+					temp.add(t.val);
+					deque.pollLast();
+				}
+			}
+			flag = -flag;
+			result.add(temp);
+		}
+		return result;
+	}
+
+	/**
 	 * 125 验证回文串
 	 * @param s
 	 * @return
