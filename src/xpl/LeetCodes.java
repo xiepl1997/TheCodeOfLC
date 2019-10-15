@@ -1497,6 +1497,36 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 102 二叉树的层次遍历
+	 * @param root
+	 * @return
+	 */
+	public List<List<Integer>> levelOrder(TreeNode root) {
+		List<List<Integer>> result = new ArrayList<>();
+		if(root == null)
+			return result;
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		while(!queue.isEmpty()){
+			int count = queue.size();
+			List<Integer> temp = new ArrayList<>();
+			while(count-- != 0){
+				TreeNode t = queue.peek();
+				if(t.left != null){
+					queue.offer(t.left);
+				}
+				if(t.right != null){
+					queue.offer(t.right);
+				}
+				temp.add(t.val);
+				queue.poll();
+			}
+			result.add(temp);
+		}
+		return result;
+	}
+
+	/**
 	 * 125 验证回文串
 	 * @param s
 	 * @return
