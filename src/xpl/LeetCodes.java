@@ -1474,6 +1474,29 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 101 对称二叉树
+	 * 检查一个二叉树，检查是否是镜像对称
+	 * @param root
+	 * @return
+	 */
+	public boolean isSymmetric(TreeNode root) {
+		if(root == null){
+			return true;
+		}
+		return jg(root.left, root.right);
+	}
+	public boolean jg(TreeNode t1, TreeNode t2){
+		if(t1 == null && t2 == null)
+			return true;
+		if(t1 == null || t2 == null)
+			return false;
+		if(t1.val == t2.val && jg(t1.left, t2.right) && jg(t1.right, t2.left)){
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * 125 验证回文串
 	 * @param s
 	 * @return
