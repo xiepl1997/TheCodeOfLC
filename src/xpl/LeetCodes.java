@@ -1573,6 +1573,24 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 104 二叉树的最大深度
+	 * @param root
+	 * @return
+	 */
+	public int maxDepth(TreeNode root) {
+		if(root == null)
+			return 0;
+		int rightdepth = maxDepth(root.right);
+		int leftdepth = maxDepth(root.left);
+		if(rightdepth > leftdepth){
+			return rightdepth + 1;
+		}
+		else{
+			return leftdepth + 1;
+		}
+	}
+
+	/**
 	 * 125 验证回文串
 	 * @param s
 	 * @return
