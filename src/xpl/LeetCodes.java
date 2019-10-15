@@ -1591,6 +1591,73 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 110 平衡二叉树
+	 * 给定一个二叉树，判断是否是平衡二叉树
+	 * @param root
+	 * @return
+	 */
+	public boolean isBalanced(TreeNode root) {
+		if(root == null){
+			return true;
+		}
+		int k = Math.abs(getd(root.left) - getd(root.right));
+		if(k <= 1 && isBalanced(root.left) && isBalanced(root.right)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	public int getd(TreeNode t){
+		if(t == null)
+			return 0;
+		int ld = getd(t.left);
+		int rd = getd(t.right);
+		if(ld > rd)
+			return ld + 1;
+		else
+			return rd + 1;
+	}
+
+	/**
+	 * 118 杨辉三角
+	 * @param numRows
+	 * @return
+	 */
+	public List<List<Integer>> generate(int numRows) {
+		List<List<Integer>> result = new ArrayList<>();
+		if(numRows == 0)
+			return result;
+		for(int i = 0; i < numRows; i++){
+			if(i == 0){
+				List<Integer> t = new ArrayList<>();
+				t.add(1);
+				result.add(t);
+			}
+			else if(i == 1){
+				List<Integer> t = new ArrayList<>();
+				t.add(1);
+				t.add(1);
+				result.add(t);
+			}
+			else{
+				List<Integer> t = new ArrayList<>();
+				t.add(1);
+				for(int j = 1; j <= i; j++){
+					if(j == i){
+						t.add(1);
+					}
+					else{
+						t.add(result.get(i-1).get(j-1)+result.get(i-1).get(j));
+					}
+				}
+				result.add(t);
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * 125 验证回文串
 	 * @param s
 	 * @return
