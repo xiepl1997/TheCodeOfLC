@@ -1620,6 +1620,28 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 114 二叉树转化为链表
+	 * 使用后序遍历
+	 * @param root
+	 */
+	public void flatten(TreeNode root) {
+		if(root == null)
+			return;
+		if(root != null){
+			flatten(root.right);
+			flatten(root.left);
+			TreeNode t = root.right;
+			root.right = root.left;
+			root.left = null;
+			while(root.right != null){
+				root = root.right;
+			}
+			root.right = t;
+
+		}
+	}
+
+	/**
 	 * 118 杨辉三角
 	 * @param numRows
 	 * @return
@@ -1907,6 +1929,32 @@ public class LeetCodes {
 				return true;
 		}
 		return false;
+	}
+
+	/**
+	 * 236 二叉树的最近的公共祖先
+	 * @param root
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+		if(root == null)
+			return root;
+		if(root == p || root == q)
+			return root;
+		TreeNode left = lowestCommonAncestor(root.left, p, q);
+		TreeNode right = lowestCommonAncestor(root.right, p, q);
+		if(left != null && right != null){
+			return root;
+		}
+		if(left != null){
+			return left;
+		}
+		if(right != null){
+			return right;
+		}
+		return null;
 	}
 
 	/**
