@@ -836,9 +836,9 @@ public class LeetCodes {
 	 * @param board
 	 * @return
 	 */
-	public boolean isValidSudoku(char[][] board) {
-
-	}
+//	public boolean isValidSudoku(char[][] board) {
+//
+//	}
 
 	/**
 	 * 46 全排列，采用回溯算法，深度搜索寻找所有结果
@@ -1844,6 +1844,22 @@ public class LeetCodes {
     }
 
 	/**
+	 * 172 阶乘后的0
+	 * 解析：归根结底，产生0是由2*5得来的，4*20=（2*2）*（2*2*5），要计算0的树就要计算2*5的个数，而2的数量肯定大于5的数量，
+	 * 问题也就转化为了求5的个数。
+	 * @param n
+	 * @return
+	 */
+	public int trailingZeroes(int n) {
+		int count = 0;
+		while(n >= 5){
+			count = count += n/5;
+			n = n / 5;
+		}
+		return count;
+	}
+
+	/**
 	 * 181 超过经理收入的员工
 	 */
 	//select e.Name Employee from Employee e where e.Salary > (select Salary from Employee b where b.Id = e.ManagerId)
@@ -2075,10 +2091,10 @@ public class LeetCodes {
 	public void addNum(int num) {
 
 	}
-
-	public double findMedian() {
-
-	}
+//
+//	public double findMedian() {
+//
+//	}
 
 	/**
 	 * 334 递增的三元子序列
@@ -2278,11 +2294,11 @@ public class LeetCodes {
 	}
 
 	/**
-	 * 887 鸡蛋掉落
-	 * @param K
-	 * @param N
-	 * @return
-	 */
+//	 * 887 鸡蛋掉落
+//	 * @param K
+//	 * @param N
+//	 * @return
+//	 */
 //	public int superEggDrop(int K, int N) {
 //
 //	}
