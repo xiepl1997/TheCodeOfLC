@@ -1591,6 +1591,42 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 107 二叉树的层次遍历Ⅱ
+	 * 添加一个栈来将102题的结果倒置
+	 * @param root
+	 * @return
+	 */
+	public List<List<Integer>> levelOrderBottom(TreeNode root) {
+		List<List<Integer>> result = new ArrayList<>();
+		if(root == null)
+			return result;
+		Queue<TreeNode> queue = new LinkedList<>();
+		Stack<List<Integer>> stack = new Stack<>();
+		queue.offer(root);
+		while(!queue.isEmpty()){
+			int s = queue.size();
+			List<Integer> temp = new ArrayList<>();
+			while(s-- != 0){
+				TreeNode t = queue.peek();
+				if(t.left != null){
+					queue.offer(t.left);
+				}
+				if(t.right != null){
+					queue.offer(t.right);
+				}
+				temp.add(t.val);
+				queue.poll();
+			}
+			stack.push(temp);
+		}
+		while(!stack.empty()){
+			result.add(stack.peek());
+			stack.pop();
+		}
+		return result;
+	}
+
+	/**
 	 * 110 平衡二叉树
 	 * 给定一个二叉树，判断是否是平衡二叉树
 	 * @param root
@@ -1617,6 +1653,35 @@ public class LeetCodes {
 			return ld + 1;
 		else
 			return rd + 1;
+	}
+
+	/**
+	 * 111 二叉树的最小深度
+	 * 层次遍历
+	 * @param root
+	 * @return
+	 */
+	public int minDepth(TreeNode root) {
+		if(root == null)
+			return 0;
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.offer(root);
+		int len = 0;
+		while(!queue.isEmpty()){
+			int count = queue.size();
+			len++;
+			while(count-- != 0){
+				TreeNode t = queue.peek();
+				if(t.left == null && t.right == null)
+					return len;
+				if(t.left != null)
+					queue.offer(t.left);
+				if(t.right != null)
+					queue.offer(t.right);
+				queue.poll();
+			}
+		}
+		return len;
 	}
 
 	/**
