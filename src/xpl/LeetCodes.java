@@ -1456,6 +1456,51 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 94 二叉树的中序遍历（递归）
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> inorderTraversal(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		h(root, result);
+		return result;
+	}
+	public void h(TreeNode t, List<Integer> res){
+		if(t != null){
+			if(t.left != null){
+				h(t.left, res);
+			}
+			res.add(t.val);
+			if(t.right != null){
+				h(t.right, res);
+			}
+		}
+	}
+
+	/**
+	 * 94 二叉树的中序遍历（非递归）
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> inorderTraversal_2(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode t = root;
+		while(t != null || !stack.isEmpty()){
+			if(t != null){
+				stack.push(t);
+				t = t.left;
+			}
+			else{
+				t = stack.pop();
+				result.add(t.val);
+				t = t.right;
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * 100 相同的树
 	 * @param p
 	 * @param q
