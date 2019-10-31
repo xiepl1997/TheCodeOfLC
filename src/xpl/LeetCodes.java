@@ -2404,6 +2404,38 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 543 二叉树的直径
+	 * 二叉树的直径就是任意两个节点路径长度中的最大值，这条路径可以穿过根节点
+	 * 解析：二叉树的直径可以理解为以每个节点作为根节点取其中的左子树的最大深度和右子树的最大深度之和
+	 * @param root
+	 * @return
+	 */
+	int max_543 = 0;
+	public int diameterOfBinaryTree(TreeNode root) {
+//		if(root == null){
+//			return 0;
+//		}
+		getR(root);
+		return max_543;
+	}
+	public int getR(TreeNode t){
+		if(t == null)
+			return 0;
+		int ld = getR(t.left);
+		int rd = getR(t.right);
+//		if(ld > rd){
+//			return ld + 1;
+//		}
+//		else{
+//			return rd + 1;
+//		}
+		if(max_543 < ld + rd){
+			max_543 = ld + rd;
+		}
+		return Math.max(ld, rd) + 1;
+	}
+
+	/**
 //	 * 887 鸡蛋掉落
 //	 * @param K
 //	 * @param N
