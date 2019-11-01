@@ -2058,6 +2058,38 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 223 矩形重叠的面积
+	 * (A,B) (C,D) (E,F) (G,H)为给出的四个点，计算重叠面积
+	 * 解析：首先判断是否有重叠，有的话直接返回两个矩形的面积之和，否则返回两个矩形的面积之和再减去重叠部分面积。
+	 * @param A
+	 * @param B
+	 * @param C
+	 * @param D
+	 * @param E
+	 * @param F
+	 * @param G
+	 * @param H
+	 * @return
+	 */
+	public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+		//如果不重叠
+		if(A >= G || E >= C || B >= H || F >= D){
+			return (C-A)*(D-B) + (G-E)*(H-F);
+		}
+		int l1 = C-A;
+		int w1 = D-B;
+		int l2 = G-E;
+		int w2 = H-F;
+
+		//重叠的四个点
+		int left = E > A ? E : A;
+		int right = C < G ? C : G;
+		int top = H < D ? H : D;
+		int down = B > F ? B : F;
+		return l1*w1 + l2*w2 - (right-left)*(top-down);
+	}
+
+	/**
 	 * 236 二叉树的最近的公共祖先
 	 * @param root
 	 * @param p
