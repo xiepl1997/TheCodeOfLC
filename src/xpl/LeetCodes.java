@@ -1894,6 +1894,47 @@ public class LeetCodes {
 		return panduan[start] = false;
 	}
 
+	/**
+	 * 144 二叉树的前序遍历（递归）
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> preorderTraversal(TreeNode root) {
+		List<Integer> res = new ArrayList<>();
+		t144(res, root);
+		return res;
+	}
+	public void t144(List<Integer> res, TreeNode t){
+		if(t != null){
+			res.add(t.val);
+			t144(res, t.left);
+			t144(res, t.right);
+		}
+	}
+
+	/**
+	 * 144 二叉树的前序遍历（非递归）
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> preorderTraversal_2(TreeNode root) {
+		Stack<TreeNode> stack = new Stack<>();
+		List<Integer> res = new ArrayList<>();
+		TreeNode t = root;
+		while(t != null || !stack.isEmpty()){
+			if(t != null){
+				stack.push(t);
+				res.add(t.val);
+				t = t.left;
+			}
+			else{
+				t = stack.peek();
+				stack.pop();
+				t = t.right;
+			}
+		}
+		return res;
+	}
 
 	/**
 	 * 152 乘积最大子序列
