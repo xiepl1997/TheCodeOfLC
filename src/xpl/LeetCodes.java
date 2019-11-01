@@ -598,12 +598,30 @@ public class LeetCodes {
 
 	/**
 	 * 22 括号生成
+	 * 采用回溯法
 	 * @param n
 	 * @return
 	 */
-//	public List<String> generateParenthesis(int n) {
-//
-//	}
+	public List<String> generateParenthesis(int n) {
+		List<String> res = new ArrayList<>();
+		dg(res, "", 0, 0, n);
+		return res;
+	}
+	//递归
+	public void dg(List<String> res, String s, int lcount, int rcount, int n){
+		if(lcount > n || rcount > n)
+			return;
+		if(lcount == n && rcount == n){
+			res.add(s);
+			return;
+		}
+		//时刻保持左边括号数量大于右边括号数量
+		if(lcount >= rcount){
+			String str = s;
+			dg(res, str+"(", lcount+1, rcount, n);
+			dg(res, str+")", lcount, rcount+1, n);
+		}
+	}
 
 	/**
 	 * 24 两两交换链表中的节点
@@ -837,6 +855,17 @@ public class LeetCodes {
 	 * @return
 	 */
 //	public boolean isValidSudoku(char[][] board) {
+//
+//	}
+
+	/**
+	 * 38 报数
+	 * @param n
+	 * @return
+	 */
+//	public String countAndSay(int n) {
+//		if(n == 1)
+//			return "1";
 //
 //	}
 
