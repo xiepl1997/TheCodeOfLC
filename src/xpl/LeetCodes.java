@@ -2223,6 +2223,34 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 257 二叉树的所有路径
+	 * @param root
+	 * @return
+	 */
+	public List<String> binaryTreePaths(TreeNode root) {
+			List<String> res = new ArrayList<>();
+			bianli(res, root, "");
+		return res;
+	}
+	public void bianli(List<String> res, TreeNode t, String s){
+		if(t == null){
+			return;
+		}
+		String str = "";
+		if(s == ""){
+			str = String.valueOf(t.val);
+		}
+		else{
+			str = s + "->" + String.valueOf(t.val);
+		}
+		if(t.left == null && t.right == null){
+			res.add(str);
+		}
+		bianli(res, t.left, str);
+		bianli(res, t.right, str);
+	}
+
+	/**
 	 * 283 移动0，将所有的0放到后面且不影响其他的
 	 * @param nums
 	 */
