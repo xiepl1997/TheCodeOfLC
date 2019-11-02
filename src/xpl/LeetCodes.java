@@ -1936,6 +1936,48 @@ public class LeetCodes {
 		return res;
 	}
 
+    /**
+     * 145 二叉树的后续遍历（递归）
+     * @param root
+     * @return
+     */
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        ad(res, root);
+        return res;
+    }
+    public void ad(List<Integer> res, TreeNode t){
+        if(t != null){
+            ad(res, t.left);
+            ad(res, t.right);
+            res.add(t.val);
+        }
+    }
+
+	/**
+	 * 145 二叉树的后序遍历（非递归）
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> postorderTraversal_2(TreeNode root) {
+		LinkedList<TreeNode> stack = new LinkedList<>();
+		LinkedList<Integer> res = new LinkedList<>();
+		if(root == null)
+		    return res;
+		stack.add(root);
+		while(!stack.isEmpty()){
+		    TreeNode t = stack.pollLast();
+		    res.addFirst(t.val);
+		    if(t.left != null){
+		        stack.add(t.left);
+            }
+		    if(t.right != null){
+		        stack.add(t.right);
+            }
+        }
+        return res;
+	}
+
 	/**
 	 * 152 乘积最大子序列
 	 * @param nums
