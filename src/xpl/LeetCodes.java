@@ -2638,6 +2638,29 @@ public class LeetCodes {
 		return -1;
 	}
 
+	/**
+	 * 1248 统计优美子数组， 滑动窗口
+	 * @param nums
+	 * @param k
+	 * @return
+	 */
+	public int numberOfSubarrays(int[] nums, int k) {
+		int res = 0;
+		int[] temp = new int[nums.length + 2];
+		int index = 0;
+		for(int i = 0; i < nums.length; i++){
+			if(nums[i] % 2 != 0){
+				temp[++index] = i;
+			}
+		}
+		temp[0] = -1;
+		temp[index+1] = nums.length;
+		for(int i = 1; i + k < index + 2; i++){
+			res += (temp[i]-temp[i - 1])*(temp[i + k]-temp[i + k - 1]);
+		}
+		return res;
+	}
+
 	public static void main(String[] args) {
 		List<List<Integer>> list = permuteUnique(new int[]{1,1,2});
 		for(int i = 0; i < list.size(); i++){
@@ -2646,6 +2669,7 @@ public class LeetCodes {
 			}
 		}
 	}
+
 
 }
 
