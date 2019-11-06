@@ -904,13 +904,13 @@ public class LeetCodes {
 	 * @param target
 	 * @return
 	 */
-	public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+	public List<List<Integer>> combinationSum(int[] candidates, int target) {
 		List<List<Integer>> res = new ArrayList<>();
 		Arrays.sort(candidates);
 		combinationSum39(res, target, candidates, new ArrayList<>(), 0, 0);
 		return res;
 	}
-	public static void combinationSum39(List<List<Integer>> res, int target, int[] candidates, List<Integer> temp, int index, int sum){
+	public void combinationSum39(List<List<Integer>> res, int target, int[] candidates, List<Integer> temp, int index, int sum){
 		if(sum == target){
 			res.add(new ArrayList<>(temp));
 			return;
@@ -922,6 +922,39 @@ public class LeetCodes {
 			temp.add(candidates[i]);
 			combinationSum39(res, target, candidates, temp, i, sum+candidates[i]);
 			temp.remove(temp.size()-1);
+		}
+	}
+
+	/**
+	 * 40 组合总数2
+	 * 回溯法
+	 * @param candidates
+	 * @param target
+	 * @return
+	 */
+	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+		List<List<Integer>> res = new ArrayList<>();
+		Arrays.sort(candidates);
+		combinationSum39_2(res, target, candidates, new ArrayList<>(), -1, 0);
+		return res;
+	}
+	public void combinationSum39_2(List<List<Integer>> res, int target, int[] candidates, List<Integer> temp, int index, int sum){
+		if(sum == target){
+			if(!res.contains(temp)){
+				res.add(new ArrayList<>(temp));
+			}
+			return;
+		}
+		if(sum > target){
+			return;
+		}
+		for(int i = index+1; i < candidates.length; i++){
+			temp.add(candidates[i]);
+			combinationSum39_2(res, target, candidates, temp, i, sum+candidates[i]);
+			temp.remove(temp.size()-1);
+			if(sum+candidates[i] > target){
+				break;
+			}
 		}
 	}
 
