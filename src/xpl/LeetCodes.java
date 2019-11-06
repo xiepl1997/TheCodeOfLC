@@ -736,6 +736,35 @@ public class LeetCodes {
 
 	}
 
+    /**
+     * 29 两数相除
+     * @param dividend
+     * @param divisor
+     * @return
+     */
+    public int divide(int dividend, int divisor) {
+        if(dividend < divisor){
+        	return 0;
+		}
+        if(dividend == divisor){
+        	return 1;
+		}
+        if(dividend == Integer.MIN_VALUE && divisor == -1){
+        	return Integer.MAX_VALUE;
+		}
+        boolean f = (dividend ^ divisor) < 0;
+        long a1 = (long)Math.abs(dividend);
+        long a2 = (long)Math.abs(divisor);
+        int res = 0;
+        for(int i = 31; i >= 0; i--){
+        	if((a1 >> i) >= a2){
+        		res += 1 << i;
+        		a1 -= a2 << i;
+			}
+		}
+        return f ? -res : res;
+    }
+
 	/**
 	 * 31 下一个排列
 	 * 从右往左找到第一对nums[i]>nums[i-1]，然后再从最右边往前找，找到第一个大于nums[i-1]的元素nums[j]，交换nums[i-1]和nums[j]，
@@ -2636,6 +2665,25 @@ public class LeetCodes {
 			}
 		}
 		return -1;
+	}
+
+	/**
+	 * 1207 独一无二的出现次数
+	 * @param arr
+	 * @return
+	 */
+	public boolean uniqueOccurrences(int[] arr) {
+		Map<Integer, Integer> map = new HashMap<>();
+		for(int i = 0; i < arr.length; i++){
+			if(map.containsKey(arr[i])){
+				map.put(arr[i], map.get(arr[i])+1);
+			}
+			else{
+				map.put(arr[i], 1);
+			}
+		}
+		Set<Integer> set = new HashSet<>(map.values());
+		return map.size() == set.size();
 	}
 
 	/**
