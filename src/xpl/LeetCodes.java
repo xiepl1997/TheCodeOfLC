@@ -5,7 +5,6 @@ import java.util.*;
 
 import javax.xml.transform.Templates;
 
-import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
 public class LeetCodes {
 	//_1两数之和
@@ -897,6 +896,34 @@ public class LeetCodes {
 //			return "1";
 //
 //	}
+
+	/**
+	 * 39 组合总数
+	 * 回溯算法
+	 * @param candidates
+	 * @param target
+	 * @return
+	 */
+	public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+		List<List<Integer>> res = new ArrayList<>();
+		Arrays.sort(candidates);
+		combinationSum39(res, target, candidates, new ArrayList<>(), 0, 0);
+		return res;
+	}
+	public static void combinationSum39(List<List<Integer>> res, int target, int[] candidates, List<Integer> temp, int index, int sum){
+		if(sum == target){
+			res.add(new ArrayList<>(temp));
+			return;
+		}
+		if(sum > target){
+			return;
+		}
+		for(int i = index; i < candidates.length; i++){
+			temp.add(candidates[i]);
+			combinationSum39(res, target, candidates, temp, i, sum+candidates[i]);
+			temp.remove(temp.size()-1);
+		}
+	}
 
 	/**
 	 * 46 全排列，采用回溯算法，深度搜索寻找所有结果
@@ -2710,12 +2737,9 @@ public class LeetCodes {
 	}
 
 	public static void main(String[] args) {
-		List<List<Integer>> list = permuteUnique(new int[]{1,1,2});
-		for(int i = 0; i < list.size(); i++){
-			for(List<Integer> l : list){
-				System.out.println(l);
-			}
-		}
+		int[] test = new int[]{2,3,6,7};
+		int target = 7;
+		List<List<Integer>> res = combinationSum(test, target);
 	}
 
 
