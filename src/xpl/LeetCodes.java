@@ -812,6 +812,16 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 33 搜索旋转排序数组
+	 * @param nums
+	 * @param target
+	 * @return
+	 */
+	public int search(int[] nums, int target) {
+
+	}
+
+	/**
 	 * 34 在排序数组中查找元素的第一个和最后一个位置
 	 * @param nums
 	 * @param target
@@ -1845,6 +1855,21 @@ public class LeetCodes {
 			}
 		}
 		return len;
+	}
+
+	/**
+	 * 112 路径总和
+	 * @param root
+	 * @param sum
+	 * @return
+	 */
+	public boolean hasPathSum(TreeNode root, int sum) {
+		if(root == null)
+			return false;
+		sum = sum - root.val;
+		if(root.left == null && root.right == null)
+			return (sum == 0);
+		return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);
 	}
 
 	/**
