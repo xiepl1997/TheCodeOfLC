@@ -901,11 +901,9 @@ public class LeetCodes {
 	 * @param n
 	 * @return
 	 */
-//	public String countAndSay(int n) {
-//		if(n == 1)
-//			return "1";
-//
-//	}
+	public String countAndSay(int n) {
+
+	}
 
 	/**
 	 * 39 组合总数
@@ -1480,6 +1478,22 @@ public class LeetCodes {
 		}
 		return false;
 	}
+
+    /**
+     * 78 子集
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i = 0; i < nums.length; i++){
+            List<Integer> temp = new ArrayList<>();
+            for(int j = i; j < nums.length; j++){
+                temp.add(nums[j]);
+                res.add(new ArrayList<>(temp));
+            }
+        }
+    }
 
 	/**
 	 * 79 单词搜索 dfs
@@ -2719,6 +2733,34 @@ public class LeetCodes {
 			max_543 = ld + rd;
 		}
 		return Math.max(ld, rd) + 1;
+	}
+
+	/**
+	 * 687 最长同值路径
+	 * @param root
+	 * @return
+	 */
+	int max_687 = 0;
+	public int longestUnivaluePath(TreeNode root) {
+		if(root == null)
+			return 0;
+		ss(root);
+		return max_687;
+	}
+	public int ss(TreeNode t){
+		if(t == null)
+			return 0;
+		int left = ss(t.left);
+		int right = ss(t.right);
+		int l = 0, r = 0;
+		if(t.left != null && t.left.val == t.val){
+			l += left + 1;
+		}
+		if(t.right != null && t.right.val == t.val) {
+			r += right + 1;
+		}
+		max_687 = Math.max(max_687, l + r);
+		return Math.max(l, r);
 	}
 
 	/**
