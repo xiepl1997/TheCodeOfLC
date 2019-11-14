@@ -1777,6 +1777,33 @@ public class LeetCodes {
 		}
 	}
 
+    /**
+     * 105 从前序与中序遍历序列构造二叉树
+     * @param preorder
+     * @param inorder
+     * @return
+     */
+    int[] pre_105;
+    int[] in_105;
+    public TreeNode buildTree_105(int[] preorder, int[] inorder) {
+        pre_105 = preorder;
+        in_105 = inorder;
+        return create_105(0, preorder.length-1, 0, preorder.length-1);
+    }
+    public TreeNode create_105(int postL, int postR, int inL, int inR){
+        if(postL > postR)
+            return null;
+        TreeNode t = new TreeNode(pre_105[postL]);
+        int pos = 0;
+        for(pos = inL; pos <= inR; pos++){
+            if(in_105[pos] == t.val)
+                break;
+        }
+        t.left = create_105(postL+1, postL+pos-inL, inL, pos-1);
+        t.right = create_105(postL+pos-inL+1, postR, pos+1, inR);
+        return t;
+    }
+
 	/**
 	 * 106 从中序与后序遍历序列构造二叉树
 	 * @param inorder
