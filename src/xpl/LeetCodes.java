@@ -1778,6 +1778,34 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 106 从中序与后序遍历序列构造二叉树
+	 * @param inorder
+	 * @param postorder
+	 * @return
+	 */
+	int[] in_169;
+	int[] post_168;
+	public TreeNode buildTree(int[] inorder, int[] postorder) {
+        in_169 = inorder;
+        post_168 = postorder;
+        return createNode(0, inorder.length-1, 0, inorder.length-1);
+	}
+	public TreeNode createNode(int postL, int postR, int inL, int inR){
+        if(postL > postR){
+            return null;
+        }
+        TreeNode t = new TreeNode(post_168[postR]);
+        int pos = 0;
+        for(pos = inL; pos <= inR; pos++){
+            if(in_169[pos] == t.val)
+                break;
+        }
+        t.left = createNode(postL, postL+pos-inL-1, inL, pos-1);
+        t.right = createNode(postL+pos-inL, postR-1, pos+1, inR);
+        return t;
+    }
+
+	/**
 	 * 107 二叉树的层次遍历Ⅱ
 	 * 添加一个栈来将102题的结果倒置
 	 * @param root
