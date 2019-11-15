@@ -272,12 +272,21 @@ public class LeetCodes {
 
 	/**
 	 * 11盛水最多的容器
+	 * 使用双指针
 	 * @param
 	 * @return
 	 */
-//	public int maxArea(int[] height) {
-//
-//	}
+	public int maxArea(int[] height) {
+		int i = 0, j = height.length-1;
+		int sum = 0;
+		while(true){
+			int temp = (j-i)*(height[i] <= height[j] ? height[i++] : height[j--]);
+			sum = sum < temp ? temp : sum;
+			if(i >= j)
+				break;
+		}
+		return sum;
+	}
 	
 	//14最长公共前缀
 	public String longestCommonPrefix(String[] strs) {
@@ -809,6 +818,32 @@ public class LeetCodes {
 				nums[l] = temp;
 			}
 		}
+	}
+
+	/**
+	 * 32 最长有效括号
+	 * 使用栈
+	 * @param s
+	 * @return
+	 */
+	public int longestValidParentheses(String s) {
+		Stack<Integer> stack = new Stack<>();
+		int maxLen = 0;
+		stack.push(-1);
+		for(int i = 0; i < s.length(); i++){
+			if(s.charAt(i) == '(')
+				stack.push(i);
+			else{
+				stack.pop();
+				if(stack.empty()){
+					stack.push(i);
+				}
+				else{
+					maxLen = Math.max(maxLen, i - stack.peek());
+				}
+			}
+		}
+		return maxLen;
 	}
 
 	/**
