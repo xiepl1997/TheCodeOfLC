@@ -1,2 +1,2 @@
 # LC
-刷leetcode的记录
+leetcode做题代码记录
