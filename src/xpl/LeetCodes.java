@@ -847,13 +847,32 @@ public class LeetCodes {
 	}
 
 	/**
-	 * 33 搜索旋转排序数组
+	 * 33 搜索旋转排序数组（二分法）
+	 * 数组旋转后一定有一半有序，一半无序，有序的部分按照二分法处理，无序的部分则再一分为二，分为有序的一半和无序的一半
 	 * @param nums
 	 * @param target
 	 * @return
 	 */
 	public int search(int[] nums, int target) {
-
+		int left = 0, right = nums.length-1, mid = right/2;
+		while(left <= right){
+			if(nums[mid] == target)
+				return mid;
+			if(nums[left] <= nums[mid]){ //左边升序
+				if(target >= nums[left] && target <= nums[mid])
+					right = mid-1;
+				else
+					left = mid+1;
+			}
+			else{
+				if(target >= nums[mid] && target <= nums[right])
+					left = mid+1;
+				else
+					right = mid-1;
+			}
+			mid = left + (right - left)/2;
+		}
+		return -1;
 	}
 
 	/**
@@ -2719,6 +2738,25 @@ public class LeetCodes {
 			r[i] = list.get(i);
 		}
 		return r;
+	}
+
+	/**
+	 * 374 猜数字大小
+	 * @param n
+	 * @return
+	 */
+	public int guessNumber(int n) {
+		int left = 0, right = n, mid = 0;
+		while(left <= right){
+			mid = left + (right - left)/2;
+			if(guess(mid) == 0)
+				return mid;
+			else if(guess(mid) == -1)
+				right = mid - 1;
+			else
+				left = mid + 1;
+		}
+		return 0;
 	}
 
 	/**
