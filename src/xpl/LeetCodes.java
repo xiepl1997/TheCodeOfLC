@@ -2590,6 +2590,26 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 278 第一个错误的版本(二分法)
+	 * @param n
+	 * @return
+	 */
+	public int firstBadVersion(int n) {
+		int left = 1, right = n, mid = 0;
+		while(left <= right){
+			mid = left + (right - left)/2;
+			if(isBadVersion(mid)) {
+				if(mid == 1 || !isBadVersion(mid-1))
+					return mid;
+				right = mid-1;
+			}
+			else
+				left = mid+1;
+		}
+		return -1;
+	}
+
+	/**
 	 * 283 移动0，将所有的0放到后面且不影响其他的
 	 * @param nums
 	 */
