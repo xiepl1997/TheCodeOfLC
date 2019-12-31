@@ -892,12 +892,12 @@ public class LeetCodes {
 			return new int[]{-1,-1};
 		}
 		int left = 0;
-		int right = nums.length;
+		int right = nums.length-1;
 		while(left < right){
-			int m = (left + right)/2;
+			int m = left+(right - left)/2;
 			if(nums[m] == target){
 				int l = m, r = m;
-				while(--l > 0 && nums[l] == target);
+				while(--l >= 0 && nums[l] == target);
 				while(++r < nums.length && nums[r] == target);
 				l++;
 				r--;
@@ -2272,6 +2272,23 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 153 寻找旋转排序数组中的最小值
+	 * @param nums
+	 * @return
+	 */
+	public int findMin(int[] nums) {
+		int left = 0, right = nums.length-1, mid = 0;
+		while(left < right){
+			mid = left + (right-left)/2;
+			if(nums[mid] < nums[right])
+				right = mid;
+			else
+				left = mid+1;
+		}
+		return nums[left];
+	}
+
+	/**
 	 * 155 最小栈
 	 * 维护一个最小值min，每次push的时候比较元素是否比min小，若小则将min更新，每次push都push两次，多push的一次就是将当前的
 	 * min添加到栈中，每次出栈都出两次
@@ -2917,6 +2934,29 @@ public class LeetCodes {
 			max_543 = ld + rd;
 		}
 		return Math.max(ld, rd) + 1;
+	}
+
+	/**
+	 * 658 找到k个最接近的数
+	 * @param arr
+	 * @param k
+	 * @param x
+	 * @return
+	 */
+	public List<Integer> findClosestElements(int[] arr, int k, int x) {
+		List<Integer> res = new ArrayList<>();
+		int left = 0, right = arr.length-1;
+		while(right - left + 1 > k){
+			int q = Math.abs(arr[right] - x);
+			int p = Math.abs(arr[left] - x);
+			if(q >= p)
+				right--;
+			else
+				left++;
+		}
+		for(int i = left; i < left+k; i++)
+			res.add(arr[i]);
+		return res;
 	}
 
 	/**
