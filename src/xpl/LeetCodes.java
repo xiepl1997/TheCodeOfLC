@@ -2689,6 +2689,25 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 287 寻找重复数
+	 * @param nums
+	 * @return
+	 */
+	public int findDuplicate(int[] nums) {
+		int[] arr = new int[nums.length];
+		int res = 0;
+		for(int i = 0; i < nums.length; i++) {
+			if(arr[nums[i]-1] == 0)
+				arr[nums[i]-1] = nums[i];
+			else{
+				res = nums[i];
+				break;
+			}
+		}
+		return res;
+	}
+
+	/**
 	 * 295 数据流的中位数
 	 */
 	/** initialize your data structure here. */
