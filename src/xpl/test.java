@@ -2,12 +2,30 @@ package xpl;
 
 public class test {
     public static void main(String[] args) {
-        ListNodes list = new ListNodes();
-        list.val = 123456;
-        System.out.println(list.val);
-        ListNodes l2 = list;
-        l2.val = 132;
-        System.out.println(l2.val+" "+list.val);
+//        ListNodes list = new ListNodes();
+//        list.val = 123456;
+//        System.out.println(list.val);
+//        ListNodes l2 = list;
+//        l2.val = 132;
+//        System.out.println(l2.val+" "+list.val);
+        System.out.println(htt(268));
+    }
+    public static int htt(int N){
+        if(N == 0)
+            return 50;
+        int max = N*10+5;
+        int temp = N;
+        int flag = 1;
+        if(N < 0)
+            flag = -1;
+        int i = 10;
+        while(Math.abs(temp) != 0){
+            int t = N % i;
+            temp = N / i;
+            max = Math.max(max, temp*(i*10) + 5*i*flag + t);
+            i *= 10;
+        }
+        return max;
     }
 
     int pointcount = 7;

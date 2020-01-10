@@ -3098,8 +3098,31 @@ public class LeetCodes {
 	public static void main(String[] args) {
 		int[] test = new int[]{2,3,6,7};
 		int target = 7;
-		List<List<Integer>> res = combinationSum(test, target);
+		//List<List<Integer>> res = combinationSum(test, target);
 	}
+
+	/**
+	 * 插入一个5，使得整数N变为最大
+	 * @param N
+	 * @return
+	 */
+    public static int htt(int N){
+        if(N == 0)
+            return 50;
+        int max = N*10+5;
+        int temp = N;
+        int flag = 1;
+        if(N < 0)
+            flag = -1;
+        int i = 10;
+        while(Math.abs(temp) != 0){
+            int t = N % i;
+            temp = N / i;
+            max = Math.max(max, temp*(i*10) + 5*i*flag + t);
+            i *= 10;
+        }
+        return max;
+    }
 
 
 }
