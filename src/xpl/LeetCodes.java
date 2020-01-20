@@ -2100,6 +2100,32 @@ public class LeetCodes {
 		return res;
 	}
 
+	/**
+	 * 119 杨辉三角2 空间复杂度优化到O(k)
+	 * @param rowIndex
+	 * @return
+	 */
+	public List<Integer> getRow(int rowIndex) {
+		List<Integer> res = new ArrayList<>();
+		res.add(1);
+		if(rowIndex == 0)
+			return res;
+		int pre_n = 0, n = 1;
+		for(int i = 1; i <= rowIndex; i++){
+			for(int j = 1; j <= i; j++){
+				if(j == i){
+					res.add(1);
+					break;
+				}
+				pre_n = n;
+				n = res.get(j);
+				res.set(j, pre_n+n);
+			}
+
+		}
+		return res;
+	}
+
 
 	/**
 	 * 125 验证回文串
