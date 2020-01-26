@@ -1145,14 +1145,59 @@ public class LeetCodes {
 	}
 
 	/**
-	 * 50 pow(x, y)，计算x的y次幂
+	 * 50 pow(x, n)，计算x的y次幂，暴力法（超时）
+     * 只需模拟x相乘n次的过程，当n小于0时，用1/x代替x，用-n代替n
 	 * @param x
 	 * @param n
 	 * @return
 	 */
-	public double myPow(double x, int n) {
-		return Math.pow(x, n);
+	public double myPow_1(double x, int n) {
+        long N = n;
+        if(N < 0){
+            x = 1/x;
+            N = -N;
+        }
+        double ans = 1;
+        for(int i = 1; i <= N; i++){
+            ans = ans * x;
+        }
+        return ans;
 	}
+
+    /**
+     * 50 pow(x, n)，计算x的y次幂，递归快速幂算法
+     * 假设已经得到了x^(n/2)，
+     * @param x
+     * @param n
+     * @return
+     */
+	public double myPow_2(double x, int n){
+        int N = n;
+        if(N < 0){
+            N = -N;
+            x = 1/x;
+        }
+        return fastPow(x, n);
+    }
+    public double fastPow(double x, long n){
+        if(n == 0)
+            return 1.0;
+        double half = fastPow(x, n/2);
+        if(n % 2 == 0)
+            return half*half;
+        else
+            return half*half*x;
+    }
+
+    /**
+     * 50 pow(x,n) 计算x的y次幂，
+     * @param x
+     * @param n
+     * @return
+     */
+    public double myPow_3(double x, int n){
+
+    }
 
     /**
      * 53.最大子序和
@@ -3027,6 +3072,21 @@ public class LeetCodes {
 
 
 	}
+
+    /**
+     * 509 斐波那契数
+     * @param N
+     * @return
+     */
+    Map<Integer,Integer> fib_map = new HashMap<>();
+    public int fib(int N) {
+        if(N < 2)
+            return N;
+        if(fib_map.containsKey(N))
+            return fib_map.get(N);
+        fib_map.put(N, fib(N-1)+fib(N-2));
+        return fib_map.get(N);
+    }
 
 	/**
 	 * 543 二叉树的直径
