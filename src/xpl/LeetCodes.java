@@ -2514,6 +2514,23 @@ public class LeetCodes {
 		return result;
 	}
 
+    /**
+     * 206 (easy) 反转链表
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while(cur != null){
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
+    }
+
 	/**
 	 * 215 数组中的第k大的数
 	 * @param nums
