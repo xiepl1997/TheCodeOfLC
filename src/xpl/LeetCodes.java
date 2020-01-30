@@ -623,6 +623,21 @@ public class LeetCodes {
     	return listNode;
     }
 
+    public ListNode mergeTwoLists_1(ListNode l1, ListNode l2){
+		if(l1 == null)
+			return l2;
+		if(l2 == null)
+			return l1;
+		if(l1.val < l2.val){
+			l1.next = mergeTwoLists_1(l1.next, l2);
+			return l1;
+		}
+		else{
+			l2.next = mergeTwoLists_1(l1, l2.next);
+			return l2;
+		}
+	}
+
 	/**
 	 * 22 括号生成
 	 * 采用回溯法
@@ -2640,6 +2655,20 @@ public class LeetCodes {
 		int down = B > F ? B : F;
 		return l1*w1 + l2*w2 - (right-left)*(top-down);
 	}
+
+    /**
+     * 231 2 的幂
+     * 检查n是否是2的幂
+     * 用位运算，n & (n-1) == 0 的话，n就是2的幂，因为2的幂的二进制形式中只有一个1.
+     * @param n
+     * @return
+     */
+    public boolean isPowerOfTwo(int n) {
+        if(n == 0)
+            return false;
+        long x = (long)n;
+        return (x & (x-1)) == 0;
+    }
 
 	/**
 	 * 236 二叉树的最近的公共祖先
