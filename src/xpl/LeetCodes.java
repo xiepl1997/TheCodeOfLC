@@ -1274,10 +1274,15 @@ public class LeetCodes {
 	 * @param nums
 	 * @return
 	 */
-//	public boolean canJump(int[] nums) {
-//		int len = nums.length;
-//
-//	}
+	public boolean canJump(int[] nums) {
+		int lastPos = nums.length - 1;
+		for (int i = nums.length - 1; i >= 0; i--) {
+			if (i + nums[i] >= lastPos) {
+				lastPos = i;
+			}
+		}
+		return lastPos == 0;
+	}
 
 	/**
 	 * 56 合并区间
@@ -2280,6 +2285,26 @@ public class LeetCodes {
 			}
 		}
 		return panduan[start] = false;
+	}
+
+	/**
+	 * 141 环形链表
+	 * 使用快慢指针可以使空间复杂度为O(1)，快指针每次走两步，慢指针每次走一步，当快指针追上慢指针时，说明有环路
+	 * @param head
+	 * @return
+	 */
+	public boolean hasCycle(ListNode head) {
+		if(head == null)
+			return false;
+		ListNode p1 = head.next; //快指针
+		ListNode p2 = head; //慢指针
+		while(p1 != null && p1.next != null){
+			if(p1 == p2)
+				return true;
+			p2 = p2.next;
+			p1 = p1.next.next;
+		}
+		return false;
 	}
 
 	/**
