@@ -1214,6 +1214,96 @@ public class LeetCodes {
 
     }
 
+	/**
+	 * 51 N皇后
+	 * @param n
+	 * @return
+	 */
+	private List<List<String>> output = new ArrayList<>();
+	//用于标记是否被列方向的皇后攻击
+	int[] rows;
+	//用于标记是否被主对角线方向的皇后攻击
+	int[] mains;
+	//用于标记是否被次对角线方向的皇后攻击
+	int[] secondary;
+	//用于存储皇后放置的位置
+	int[] queens;
+	int n;
+	public List<List<String>> solveNQueens(int n) {
+		//初始化
+		rows = new int[n];
+		mains = new int[2*n-1];
+		secondary = new int[2*n-1];
+		queens = new int[n];
+		this.n = n;
+		//从第一行开始求解N皇后
+		backtrack(0);
+		return output;
+	}
+	//在第一行中放置一个皇后
+	private void backtrack(int row){
+		if(row >= n)
+			return;
+		//分别尝试在第row行中的每一列中放置皇后
+		for(int col = 0; col < n; col++){
+			//判断当前放置的皇后是否被攻击
+			if(isNotUnderAttack(row, col)){
+				//在当前的位置上放置皇后
+				placeQueen(row, col);
+				if(row == n-1)
+					addSolution();
+				backtrack(row+1);
+				removeQueen(row, col);
+			}
+		}
+	}
+	//判断row行，col列这个位置有没有其他方向的皇后攻击
+	private boolean isNotUnderAttack(int row, int col){
+		/*
+		判断的逻辑是：
+			当前位置列方向没有皇后攻击；
+			当前位置主对角线方向没有皇后攻击；
+			当前位置次对角线方向没有皇后攻击；
+		 */
+		int res = rows[col]+mains[row-col+n-1]+secondary[row+col];
+		return res == 0;
+	}
+	//在指定的位置上放置皇后
+	private void placeQueen(int row, int col){
+		//在row行col列上放置皇后
+		queens[row] = col;
+		//当前位置的列方向设置为存在皇后
+		rows[col] = 1;
+		//当前位置的主对角线方向设置为存在皇后
+		mains[row-col+n-1] = 1;
+		//当前位置的次对角线方向设置为存在皇后
+		secondary[row+col] = 1;
+	}
+	//移除元素
+	private void removeQueen(int row, int col){
+		queens[row] = 0;
+		rows[col] = 0;
+		mains[row-col+n-1] = 0;
+		secondary[row+col] = 0;
+	}
+	//将满足条件的皇后位置放入output中
+	private void addSolution(){
+		List<String> solution = new ArrayList<>();
+		for(int i = 0; i < n; i++){
+			int col = queens[i];
+			String str = "";
+			for(int j = 0; j < col; j++){
+				str += ".";
+			}
+			str += "Q";
+			for(int j = col+1; j < n; j++){
+				str += ".";
+			}
+			solution.add(str);
+		}
+		output.add(solution);
+	}
+
     /**
      * 53.最大子序和
      * @param nums
