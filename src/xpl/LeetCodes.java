@@ -2630,6 +2630,31 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 160 相交链表
+	 * 
+	 * @param headA
+	 * @param headB
+	 * @return
+	 */
+	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+		if(headA == null || headB == null)
+			return null;
+		ListNode n1 = headA;
+		ListNode n2 = headB;
+		while(n1 != n2){
+			n1 = n1.next;
+			n2 = n2.next;
+			if(n1 == null && n2 == null)
+				return null;
+			if(n1 == null)
+				n1 = headB;
+			if(n2 == null)
+				n2 = headA;
+		}
+		return n1;
+	}
+
+	/**
 	 * 162 寻找峰值(二分）
 	 * @param nums
 	 * @return
