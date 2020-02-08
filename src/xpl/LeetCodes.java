@@ -1858,6 +1858,29 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 90 子集Ⅱ，78题剪枝
+	 * @param nums
+	 * @return
+	 */
+	public List<List<Integer>> subsetsWithDup(int[] nums) {
+		List<List<Integer>> res = new ArrayList<>();
+		Arrays.sort(nums);
+		dg_90(0, res, nums, new ArrayList<>());
+		return res;
+	}
+	private void dg_90(int index, List<List<Integer>> res, int[] nums, List<Integer> temp){
+		res.add(new ArrayList<>(temp));
+		for(int i = index; i < nums.length; i++){
+			if(i-1>=index && nums[i] == nums[i-1]){
+				continue;
+			}
+			temp.add(nums[i]);
+			dg_90(i+1, res, nums, temp);
+			temp.remove(temp.size()-1);
+		}
+	}
+
+	/**
 	 * 94 二叉树的中序遍历（递归）
 	 * @param root
 	 * @return
