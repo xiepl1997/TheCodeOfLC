@@ -1445,6 +1445,16 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 60 第k个排列
+	 * @param n
+	 * @param k
+	 * @return
+	 */
+	public String getPermutation(int n, int k) {
+
+	}
+
+	/**
 	 * 62 不同路径，m*n矩阵中左上角到右下角的路径数量
 	 * @param m
 	 * @param n
@@ -1727,20 +1737,23 @@ public class LeetCodes {
 	}
 
     /**
-     * 78 子集
+     * 78 子集，递归算法
      * @param nums
      * @return
      */
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
-        for(int i = 0; i < nums.length; i++){
-            List<Integer> temp = new ArrayList<>();
-            for(int j = i; j < nums.length; j++){
-                temp.add(nums[j]);
-                res.add(new ArrayList<>(temp));
-            }
-        }
+		dg_78(0, res, nums, new ArrayList<>());
+		return res;
     }
+    private void dg_78(int index, List<List<Integer>> res, int[] nums, ArrayList<Integer> temp){
+		res.add(new ArrayList<>(temp));
+		for(int i = index; i < nums.length; i++){
+			temp.add(nums[i]);
+			dg_78(i+1, res, nums, temp);
+			temp.remove(temp.size()-1);
+		}
+	}
 
 	/**
 	 * 79 单词搜索 dfs
