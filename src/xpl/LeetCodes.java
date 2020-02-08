@@ -2354,6 +2354,27 @@ public class LeetCodes {
 		return maxprofit;
 	}
 
+	/**
+	 * 122 买卖股票的最佳时机Ⅱ
+	 * 计算所有的上升线段
+	 * @param prices
+	 * @return
+	 */
+	public int maxProfit_2(int[] prices) {
+		int now = 0;
+		int maxprofit = 0;
+		for(int i = 1; i < prices.length; i++){
+			if(prices[i] < prices[i-1])
+			{
+				maxprofit += prices[i-1]-prices[now];
+				now = i;
+			}
+			else if(i == prices.length-1)
+				maxprofit += prices[i]-prices[now];
+
+		}
+		return maxprofit;
+	}
 
 	/**
 	 * 125 验证回文串
@@ -2631,7 +2652,7 @@ public class LeetCodes {
 
 	/**
 	 * 160 相交链表
-	 * 
+	 *
 	 * @param headA
 	 * @param headB
 	 * @return
