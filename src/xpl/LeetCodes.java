@@ -2912,6 +2912,16 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 237 删除链表中的节点
+	 * 只给出要删除的那个节点
+	 * @param node
+	 */
+	public void deleteNode(ListNode node) {
+		node.val = node.next.val;
+		node.next = node.next.next;
+	}
+
+	/**
 	 * 238 除自身以外数组的乘积
 	 * @param nums
 	 * @return
@@ -3083,6 +3093,15 @@ public class LeetCodes {
 			}
 		}
 		return res;
+	}
+
+	/**
+	 * 292 Nim游戏
+	 * @param n
+	 * @return
+	 */
+	public boolean canWinNim(int n) {
+		return (n%4 != 0);
 	}
 
 	/**
@@ -3362,6 +3381,24 @@ public class LeetCodes {
 			max_543 = ld + rd;
 		}
 		return Math.max(ld, rd) + 1;
+	}
+
+	/**
+	 * 557 	反转字符串中的单词Ⅲ
+	 * @param s
+	 * @return
+	 */
+	public String reverseWords(String s) {
+		String[] words = s.split(" ");
+		String res = "";
+		for(int i = 0; i < words.length; i++){
+			res += vers(words[i])+" ";
+		}
+		return res.trim();
+	}
+	private String vers(String s){
+		StringBuilder sb = new StringBuilder(s);
+		return sb.reverse().toString();
 	}
 
 	/**
