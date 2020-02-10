@@ -1455,6 +1455,42 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 61 旋转链表
+	 * @param head
+	 * @param k
+	 * @return
+	 */
+	public ListNode rotateRight(ListNode head, int k) {
+		if(head == null || k == 0)
+			return head;
+		int len = 0;
+		ListNode l = head;
+		while(l != null){
+			len++;
+			l = l.next;
+		}
+		if(len == 1 || len == k)
+			return head;
+		if(k > len)
+			k = k % len;
+		if(k == 0)
+			return head;
+		l = head;
+		for(int i = 1; i < len-k; i++){
+			l = l.next;
+		}
+		ListNode l2 = l;
+		l = l.next;
+		ListNode l3 = l;
+		l2.next = null;
+		while(l.next != null)
+			l = l.next;
+		l.next = head;
+		return l3;
+
+	}
+
+	/**
 	 * 62 不同路径，m*n矩阵中左上角到右下角的路径数量
 	 * @param m
 	 * @param n
@@ -3119,6 +3155,29 @@ public class LeetCodes {
 //	public double findMedian() {
 //
 //	}
+
+	/**
+	 * 300 最长上升子序列LIS
+	 * @param nums
+	 * @return
+	 */
+	public int lengthOfLIS(int[] nums) {
+		if(nums == null || nums.length == 0)
+			return 0;
+		int[] f = new int[nums.length];//用于记录该位置最长上升子序列的长度
+		for(int i = 0; i < nums.length; i++)
+			f[i] = 1;
+		int res = f[0];
+		for(int i = 1; i < nums.length; i++){
+			for(int j = 0; j < i; j++){
+				if(nums[i] > nums[j]){
+					f[i] = Math.max(f[i], f[j]+1);
+				}
+			}
+			res = Math.max(res, f[i]);
+		}
+		return res;
+	}
 
 	/**
 	 * 334 递增的三元子序列
