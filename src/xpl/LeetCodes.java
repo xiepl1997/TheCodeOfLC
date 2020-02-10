@@ -881,6 +881,32 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 32 最长的有效括号
+	 * 使用动态规划
+	 * @param s
+	 * @return
+	 */
+	public int longestValidParentheses_1(String s) {
+		int res = 0;
+		int[] dp = new int[s.length()];
+		for(int i = 1; i < s.length(); i++){
+			//判断两位
+			if(s.charAt(i) == ')'){
+				//如果是 “()”
+				if(s.charAt(i-1) == '('){
+					dp[i] = (i >= 2 ? dp[i-2] : 0) + 2;
+				}
+				//如果是 “))”
+				else if(i-1-dp[i-1]>=0 && s.charAt(i-1-dp[i-1]) == '('){
+					dp[i] = dp[i-1]+(i-1-dp[i-1]-1>0?dp[i-1-dp[i-1]-1]:0)+2;
+				}
+				res = Math.max(res, dp[i]);
+			}
+		}
+		return res;
+	}
+
+	/**
 	 * 33 搜索旋转排序数组（二分法）
 	 * 数组旋转后一定有一半有序，一半无序，有序的部分按照二分法处理，无序的部分则再一分为二，分为有序的一半和无序的一半
 	 * @param nums
