@@ -1186,6 +1186,34 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 49 字母异位词分组
+	 * @param strs
+	 * @return
+	 */
+	public List<List<String>> groupAnagrams(String[] strs) {
+		if(strs.length == 0)
+			return new ArrayList<>();
+		Map<String, List> ans = new HashMap<>();
+		int[] count = new int[26];
+		for(String s : strs){
+			Arrays.fill(count, 0);
+			for(char c : s.toCharArray()){
+				count[c-'a']++;
+			}
+			StringBuilder sb = new StringBuilder("");
+			for(int i : count){
+				sb.append('#');
+				sb.append(i);
+			}
+			String key = sb.toString();
+			if(!ans.containsKey(key))
+				ans.put(key, new ArrayList());
+			ans.get(key).add(s);
+		}
+		return new ArrayList(ans.values());
+	}
+
+	/**
 	 * 50 pow(x, n)，计算x的y次幂，暴力法（超时）
      * 只需模拟x相乘n次的过程，当n小于0时，用1/x代替x，用-n代替n
 	 * @param x
