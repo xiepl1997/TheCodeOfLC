@@ -152,4 +152,77 @@ public class PointToOffer {
         }
         return numbers[left];
     }
+
+    /**
+     * 面试题12 矩阵中的路径
+     * @param board
+     * @param word
+     * @return
+     */
+    char[][] board;
+    int[][] flag;
+    String word;
+    public boolean exist(char[][] board, String word) {
+        this.board = board;
+        this.word = word;
+        if(board==null || board.length == 0)
+            return false;
+        flag = new int[board.length][board[0].length];
+        for(int i = 0 ;i < board.length; i++){
+            for(int j = 0; j < board[0].length; j++){
+                if(board[i][j] == word.charAt(0)){
+                    flag[i][j] = 1;
+                    if(word.length()==1||dfs_12(0, i, j)) {
+                        return true;
+                    }
+                    flag[i][j] = 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 深度搜索
+     * @param index
+     * @param i
+     * @param j
+     * @return
+     */
+    public boolean dfs_12(int index, int i, int j){
+        if(!(i >= 0 && i <= board.length-1 && j >= 0 && j <= board[0].length-1))
+            return false;
+        if(index > word.length()-1)
+            return false;
+        if(word.charAt(index) != board[i][j])
+            return false;
+        if(index == word.length()-1)
+            return true;
+        //向四个方向搜索
+        if(i+1<=board.length-1 && flag[i+1][j] == 0){
+            flag[i+1][j] = 1;
+            if(dfs_12(index+1, i+1, j))
+                return true;
+            flag[i+1][j] = 0;
+        }
+        if(i-1>=0 && flag[i-1][j] == 0){
+            flag[i-1][j] = 1;
+            if(dfs_12(index+1, i-1, j))
+                return true;
+            flag[i-1][j] = 0;
+        }
+        if(j-1>=0 && flag[i][j-1] == 0){
+            flag[i][j-1] = 1;
+            if(dfs_12(index+1, i, j-1))
+                return true;
+            flag[i][j-1] = 0;
+        }
+        if(j+1<=board[0].length-1 && flag[i][j+1] == 0){
+            flag[i][j+1] = 1;
+            if(dfs_12(index+1, i, j+1))
+                return true;
+            flag[i][j+1] = 0;
+        }
+        return false;
+    }
 }
