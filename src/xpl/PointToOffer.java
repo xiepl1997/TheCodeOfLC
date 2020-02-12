@@ -276,6 +276,25 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题14-1 剪绳子
+     * 使用数学方法，得：尽可能将每一段剪成相同长度（最好为3）时，乘积最大
+     * @param n
+     * @return
+     */
+    public int cuttingRope(int n) {
+        if(n == 2)
+            return 2;
+        if(n == 3)
+            return 2;
+        int res = 1;
+        while(n > 4){
+            res *= 3;
+            n -= 3;
+        }
+        return res * n;
+    }
+
+    /**
      * 面试题15 二进制中1的个数
      * @param n
      * @return
