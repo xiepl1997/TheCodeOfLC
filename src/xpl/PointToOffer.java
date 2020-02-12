@@ -64,4 +64,31 @@ public class PointToOffer {
         }
         return res;
     }
+
+    /**
+     * 面试题06 从尾到头打印链表
+     * @param head
+     * @return
+     */
+    public int[] reversePrint(ListNode head) {
+        if(head == null)
+            return new int[0];
+        ListNode pre = null;
+        ListNode now = head;
+        int len = 0;
+        while(now != null){
+            ListNode temp = head.next;
+            now.next = pre;
+            pre = now;
+            now = temp;
+            len ++;
+        }
+        len = 0;
+        int[] res = new int[len];
+        while(pre != null){
+            res[len++] = pre.val;
+            pre = pre.next;
+        }
+        return res;
+    }
 }
