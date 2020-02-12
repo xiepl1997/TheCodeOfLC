@@ -283,7 +283,7 @@ public class PointToOffer {
      */
     public int cuttingRope(int n) {
         if(n == 2)
-            return 2;
+            return 1;
         if(n == 3)
             return 2;
         int res = 1;
@@ -292,6 +292,25 @@ public class PointToOffer {
             n -= 3;
         }
         return res * n;
+    }
+
+    /**
+     * 面试题14-2 剪绳子2
+     * @param n
+     * @return
+     */
+    public int cuttingRope_2(int n) {
+        if(n == 2)
+            return 1;
+        if(n == 3)
+            return 2;
+        long res = 1;
+        while(n > 4){
+            res *= 3;
+            res = res % 1000000007;
+            n -= 3;
+        }
+        return (int)(res * n % 1000000007);
     }
 
     /**
@@ -308,5 +327,48 @@ public class PointToOffer {
             mask<<=1;
         }
         return sum;
+    }
+
+    /**
+     * 面试题17 打印从1到最大的n位数
+     * @param n
+     * @return
+     */
+    public int[] printNumbers(int n) {
+        n = (int)Math.pow(10, n)-1;
+        int[] res = new int[n];
+        for(int i = 1; i <= n; i++){
+            res[i-1] = i;
+        }
+        return res;
+    }
+
+    /**
+     * 面试题18 删除链表的节点
+     * @param head
+     * @param val
+     * @return
+     */
+    public ListNode deleteNode(ListNode head, int val) {
+        ListNode now = head;
+        ListNode pre = head;
+        while(now != null){
+            if(now.val == val){
+                //判断是否是头节点
+                if(now == head){
+                    return head.next;
+                }
+                //判断是否是尾节点
+                if(now.next == null){
+                    pre.next = null;
+                    return head;
+                }
+                pre.next = now.next;
+                return head;
+            }
+            pre = now;
+            now = now.next;
+        }
+        return null;
     }
 }
