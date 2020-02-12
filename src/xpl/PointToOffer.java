@@ -91,4 +91,46 @@ public class PointToOffer {
         }
         return res;
     }
+
+    /**
+     * 面试题10-1 斐波那契数列
+     * @param n
+     * @return
+     */
+    int[] fa = new int[101];
+    public int fib(int n) {
+        return (int)f(n)%1000000007;
+    }
+    public long f(int n){
+        if(fa[n] != 0)
+            return fa[n];
+        if(n == 0)
+            return fa[0] = 0;
+        if(n == 1)
+            return fa[1] = 1;
+        if(n == 2)
+            return fa[2] = 1;
+        return fa[n]=fib(n-1)+fib(n-2);
+    }
+
+    /**
+     * 面试题10-2 青蛙跳台阶
+     * @param n
+     * @return
+     */
+    int[] f_10 = new int[101];
+    public int numWays(int n) {
+        return (int)f_102(n)%1000000007;
+    }
+    public long f_102(int n){
+        if(f_10[n] != 0)
+            return f_10[n];
+        if(n == 0)
+            return f_10[0] = 1;
+        if(n == 1)
+            return f_10[1] = 1;
+        if(n == 2)
+            return f_10[2] = 2;
+        return f_10[n] = numWays(n-1) + numWays(n-2);
+    }
 }
