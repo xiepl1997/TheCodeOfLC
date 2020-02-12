@@ -2760,6 +2760,7 @@ public class LeetCodes {
 
 	/**
 	 * 153 寻找旋转排序数组中的最小值
+     * 无重复数
 	 * @param nums
 	 * @return
 	 */
@@ -2774,6 +2775,26 @@ public class LeetCodes {
 		}
 		return nums[left];
 	}
+
+    /**
+     * 154 寻找旋转排序数组中的最小值2
+     * 有重复数
+     * @param nums
+     * @return
+     */
+    public int findMin_2(int[] nums) {
+        int left = 0, right = nums.length-1, mid = 0;
+        while(left < right){
+            mid = left + (right-left)/2;
+            if(nums[mid] < nums[right])
+                right = mid;
+            else if(nums[mid] > nums[right])
+                left = mid+1;
+            else
+                right -= 1;
+        }
+        return nums[left];
+    }
 
 	/**
 	 * 155 最小栈

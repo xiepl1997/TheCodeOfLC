@@ -133,4 +133,23 @@ public class PointToOffer {
             return f_10[2] = 2;
         return f_10[n] = numWays(n-1) + numWays(n-2);
     }
+
+    /**
+     * 面试题11 旋转数组的最小数字
+     * @param numbers
+     * @return
+     */
+    public int minArray(int[] numbers) {
+        int left = 0, right = numbers.length-1, mid = 0;
+        while(left < right){
+            mid = left + (right-left)/2;
+            if(numbers[mid] < numbers[right])
+                right = mid;
+            else if(numbers[mid] > numbers[right])
+                left = mid+1;
+            else
+                right -= 1;
+        }
+        return numbers[left];
+    }
 }
