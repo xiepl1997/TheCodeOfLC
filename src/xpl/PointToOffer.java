@@ -46,4 +46,22 @@ public class PointToOffer {
         }
         return false;
     }
+
+    /**
+     * 面试题05 替换空格
+     * @param s
+     * @return
+     */
+    public String replaceSpace(String s) {
+        if(s.isEmpty())
+            return s;
+        String res = "";
+        for(char c : s.toCharArray()){
+            if(c != ' ')
+                res += c;
+            else
+                res += "%20";
+        }
+        return res;
+    }
 }
