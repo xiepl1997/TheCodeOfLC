@@ -225,4 +225,69 @@ public class PointToOffer {
         }
         return false;
     }
+
+    /**
+     * 面试题13 机器人的运动范围
+     * @param m
+     * @param n
+     * @param k
+     * @return
+     */
+    int k;
+    int count;
+    public int movingCount(int m, int n, int k) {
+        if(m == 0 || n == 0)
+            return 0;
+        this.k = k;
+        int[][] matrix = new int[m][n];
+        dfs_13( 0, 0, matrix);
+        return count;
+    }
+    public void dfs_13(int i, int j, int[][] matrix){
+        //越界
+        if(!(i >= 0 && i <= matrix.length-1 && j >= 0 && j <= matrix[0].length-1))
+            return;
+        if(func(i)+func(j) <= k){
+            count++;
+            matrix[i][j] = 1;
+        }
+        else
+            return;
+        if(i-1 >= 0 && matrix[i-1][j] == 0){
+            dfs_13(i-1, j, matrix);
+        }
+        if(i+1 <= matrix.length-1 && matrix[i+1][j] == 0){
+            dfs_13(i+1, j, matrix);
+        }
+        if(j-1 >= 0 && matrix[i][j-1] == 0){
+            dfs_13(i, j-1, matrix);
+        }
+        if(j+1 <= matrix[0].length && matrix[i][j+1] == 0){
+            dfs_13(i, j+1, matrix);
+        }
+    }
+    public int func(int a){
+        int sum = 0;
+        while(a != 0){
+            sum += a%10;
+            a /= 10;
+        }
+        return sum;
+    }
+
+    /**
+     * 面试题15 二进制中1的个数
+     * @param n
+     * @return
+     */
+    public int hammingWeight(int n) {
+        int sum = 0;
+        int mask = 1;
+        for(int i = 0; i < 32; i++){
+            if((n & mask) != 0)
+                sum++;
+            mask<<=1;
+        }
+        return sum;
+    }
 }
