@@ -1,5 +1,7 @@
 package xpl;
 
+import org.w3c.dom.NodeList;
+
 public class PointToOffer {
     /**
      * 面试题3 数组中重复的数字
@@ -395,5 +397,84 @@ public class PointToOffer {
         }
         return null;
     }
-    
+
+    /**
+     * 面试题21 调整数组顺序使奇数位于偶数前面
+     * 例如[1,2,3,4]，调整为[1,3,2,4]或[3,1,2,4]
+     * @param nums
+     * @return
+     */
+    public int[] exchange(int[] nums) {
+        int l = 0;
+        int r = nums.length-1;
+        while(l < r){
+            while(l<r && nums[l] % 2 == 1)l++;
+            while(l<r && nums[r] % 2 == 0)r--;
+            int temp = nums[l];
+            nums[l] = nums[r];
+            nums[r] = temp;
+        }
+        return nums;
+    }
+
+    /**
+     * 面试题22 链表中倒数第k个节点
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        if(head == null)
+            return head;
+        ListNode l1 = head;
+        ListNode l2 = head;
+        while(k-- != 0 && l1 != null){
+            l1 = l1.next;
+        }
+        while(l1 != null){
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        return l2;
+    }
+
+    /**
+     * 面试题24 反转链表
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null)
+            return head;
+        ListNode pre = null;
+        ListNode now = head;
+        while(now != null){
+            ListNode temp = now.next;
+            now.next = pre;
+            pre = now;
+            now = temp;
+        }
+        return pre;
+    }
+
+    /**
+     * 面试题25 合并两个排序的链表
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null)
+            return l2;
+        if(l2 == null)
+            return l1;
+        if(l1.val < l2.val){
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
+        }else{
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
+        }
+    }
+
 }
