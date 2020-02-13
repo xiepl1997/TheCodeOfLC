@@ -477,4 +477,43 @@ public class PointToOffer {
         }
     }
 
+    /**
+     * 面试题27 二叉树的镜像
+     * 递归
+     * @param root
+     * @return
+     */
+    public TreeNode mirrorTree(TreeNode root) {
+        if(root == null)
+            return root;
+        //如果是叶子，则不必翻转
+        if(root.left == null && root.right == null)
+            return root;
+        TreeNode left = mirrorTree(root.left);
+        TreeNode right = mirrorTree(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+    }
+
+    /**
+     * 面试题28 对称的二叉树
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null)
+            return true;
+        return zz(root.left, root.right);
+    }
+    public boolean zz(TreeNode l1, TreeNode l2){
+        if(l1 == null && l2 == null)
+            return true;
+        if(l1 == null || l2 == null)
+            return false;
+        if(l1.val == l2.val && zz(l1.left, l2.right) && zz(l1.right, l2.left))
+            return true;
+        return false;
+    }
+
 }
