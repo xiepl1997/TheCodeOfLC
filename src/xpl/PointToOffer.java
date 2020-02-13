@@ -330,6 +330,30 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题16 数值的整数次方
+     * 快速幂方法
+     * @param x
+     * @param n
+     * @return
+     */
+    public double myPow(double x, int n) {
+        if(n < 0){
+            x = 1/x;
+            n = -n;
+        }
+        return f_16(x, n);
+    }
+    public double f_16(double x, int n){
+        if(n == 0)
+            return 1.0;
+        double half = f_16(x, n/2);
+        if(n/2 % 2 == 0)
+            return half*half;
+        else
+            return half*half*x;
+    }
+
+    /**
      * 面试题17 打印从1到最大的n位数
      * @param n
      * @return
@@ -371,4 +395,5 @@ public class PointToOffer {
         }
         return null;
     }
+    
 }
