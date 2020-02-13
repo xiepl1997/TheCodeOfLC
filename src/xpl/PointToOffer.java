@@ -516,4 +516,52 @@ public class PointToOffer {
         return false;
     }
 
+    /**
+     * 面试题29 顺时针打印矩阵
+     * @param matrix
+     * @return
+     */
+    public int[] spiralOrder(int[][] matrix) {
+        if(matrix == null || matrix.length == 0)
+            return new int[0];
+        int top = 0;
+        int bottom = matrix.length-1;
+        int left = 0;
+        int right = matrix[0].length-1;
+        int[] res = new int[matrix.length*matrix[0].length];
+        int index = 0;
+        while(true){
+            if(left <= right){
+                for(int i = left; i <= right; i++){
+                    res[index++] = matrix[top][i];
+                }
+            }
+            else break;
+            top++;
+            if(top <= bottom){
+                for(int i = top; i <= bottom; i++){
+                    res[index++] = matrix[i][right];
+                }
+            }
+            else break;
+            right--;
+            if(right >= left){
+                for(int i = right; i >= left; i--){
+                    res[index++] = matrix[bottom][i];
+                }
+            }
+            else break;
+            bottom--;
+            if(bottom >= top){
+                for(int i = bottom; i >= top; i--){
+                    res[index++] = matrix[i][left];
+                }
+            }
+            else break;
+            left++;
+
+        }
+        return res;
+    }
+
 }
