@@ -655,4 +655,65 @@ public class PointToOffer {
         return r;
     }
 
+    /**
+     * 面试题32-2 从上到下打印二叉树Ⅱ
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder_2(TreeNode root) {
+        if(root == null)
+            return new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int len = queue.size();
+            List<Integer> temp = new ArrayList<>();
+            for(int i = 0; i < len; i++){
+                TreeNode t = queue.poll();
+                if(t != null){
+                    temp.add(t.val);
+                    if(t.left!=null)queue.add(t.left);
+                    if(t.right!=null)queue.add(t.right);
+                }
+            }
+            res.add(temp);
+        }
+        return res;
+    }
+
+    /**
+     * 面试题32-3 从上到下打印二叉树Ⅲ
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder_3(TreeNode root) {
+        if(root == null)
+            return new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int flag = -1;
+        while(!queue.isEmpty()){
+            int len = queue.size();
+            List<Integer> temp = new ArrayList<>();
+            for(int i = 0; i < len; i++){
+                TreeNode t = queue.poll();
+                if(t != null){
+                    temp.add(t.val);
+                    if(t.left!=null)queue.add(t.left);
+                    if(t.right!=null)queue.add(t.right);
+                }
+            }
+            if(flag == -1){
+                Collections.reverse(temp);
+                res.add(temp);
+            }
+            else
+                res.add(temp);
+            flag = -flag;
+        }
+        return res;
+    }
+
 }
