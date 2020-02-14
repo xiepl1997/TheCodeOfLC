@@ -716,4 +716,31 @@ public class PointToOffer {
         return res;
     }
 
+    /**
+     * 面试题39 数组中出现此树超过一半的数字
+     * @param nums
+     * @return
+     */
+    public int majorityElement(int[] nums) {
+//        排序法
+//        Arrays.sort(nums);
+//        return nums[nums.length/2];
+
+//        摩尔投票法
+        int member = nums[0];
+        int count = 1;
+        for(int i = 1; i < nums.length; i++){
+            if(count == 0){
+                member = nums[i];
+                count = 1;
+                continue;
+            }
+            if(member != nums[i])
+                count--;
+            else
+                count++;
+        }
+        return member;
+    }
+
 }
