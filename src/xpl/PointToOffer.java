@@ -743,4 +743,36 @@ public class PointToOffer {
         return member;
     }
 
+    /**
+     * 面试题40 最小的k个数
+     * @param arr
+     * @param k
+     * @return
+     */
+    public int[] getLeastNumbers(int[] arr, int k) {
+        int[] res = new int[k];
+        Arrays.sort(arr);
+        for(int i = 0; i < k; i++)
+            res[i] = arr[i];
+        return res;
+    }
+
+    /**
+     * 面试题42 连续子数组的最大和
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
+        int max = nums[0];
+        int res = nums[0];
+        for(int i = 1; i < nums.length; i++){
+            if(max < 0)
+                max = nums[i];
+            else
+                max += nums[i];
+            res = Math.max(res, max);
+        }
+        return res;
+    }
+
 }
