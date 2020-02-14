@@ -2,6 +2,10 @@ package xpl;
 
 import org.w3c.dom.NodeList;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class PointToOffer {
     /**
      * 面试题3 数组中重复的数字
@@ -562,6 +566,44 @@ public class PointToOffer {
 
         }
         return res;
+    }
+
+    /**
+     * 面试题30 包含min函数的栈
+     * min,push,pop复杂度为O(1)
+     */
+    class MinStack {
+        List<Integer> list;
+        int min;
+        /** initialize your data structure here. */
+        public MinStack() {
+            list = new ArrayList<>();
+            min = Integer.MAX_VALUE;
+        }
+
+        public void push(int x) {
+            if(list.size() == 0)
+                min = Integer.MAX_VALUE;
+            else
+                min = list.get(list.size()-1);
+            list.add(x);
+            if(min > x)
+                min = x;
+            list.add(min);
+        }
+
+        public void pop() {
+            list.remove(list.size()-1);
+            list.remove(list.size()-1);
+        }
+
+        public int top() {
+            return list.get(list.size()-2);
+        }
+
+        public int min() {
+            return list.get(list.size()-1);
+        }
     }
 
 }
