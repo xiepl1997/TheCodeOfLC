@@ -3733,6 +3733,26 @@ public class LeetCodes {
 //
 //	}
 
+    /**
+     * 946 验证栈序列
+     * @param pushed
+     * @param popped
+     * @return
+     */
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        int len = pushed.length;
+        Stack<Integer> stack = new Stack<>();
+        int j = 0;
+        for(int x : pushed){
+            stack.push(x);
+            while(!stack.isEmpty() && j < len && stack.peek() == popped[j]){
+                stack.pop();
+                j++;
+            }
+        }
+        return j == len;
+    }
+
 	/**
 	 * 997 小镇的法官
 	 * @param N

@@ -5,6 +5,7 @@ import org.w3c.dom.NodeList;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class PointToOffer {
     /**
@@ -604,6 +605,26 @@ public class PointToOffer {
         public int min() {
             return list.get(list.size()-1);
         }
+    }
+
+    /**
+     * 面试题31 栈的压入、弹出序列
+     * @param pushed
+     * @param popped
+     * @return
+     */
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        int len = pushed.length;
+        Stack<Integer> stack = new Stack<>();
+        int j = 0;
+        for(int x : pushed){
+            stack.push(x);
+            while(!stack.isEmpty() && j < len && stack.peek() == popped[j]){
+                stack.pop();
+                j++;
+            }
+        }
+        return j == len;
     }
 
 }
