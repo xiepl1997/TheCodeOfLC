@@ -3,9 +3,7 @@ package xpl;
 import org.w3c.dom.NodeList;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class PointToOffer {
     /**
@@ -625,6 +623,36 @@ public class PointToOffer {
             }
         }
         return j == len;
+    }
+
+    /**
+     * 面试题32 从上到下打印二叉树(层次遍历)
+     * @param root
+     * @return
+     */
+    public int[] levelOrder(TreeNode root) {
+        if(root == null)
+            return new int[0];
+        List<Integer> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int len = queue.size();
+            for(int i = 0; i < len; i++){
+                TreeNode t = queue.poll();
+                if(t != null){
+                    res.add(t.val);
+                    queue.add(t.left);
+                    queue.add(t.right);
+                }
+
+            }
+        }
+        int[] r = new int[res.size()];
+        for(int i = 0; i < res.size(); i++){
+            r[i] = res.get(i);
+        }
+        return r;
     }
 
 }
