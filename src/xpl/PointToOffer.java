@@ -875,6 +875,23 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题53-2 0~n-1中缺失的数字
+     * @param nums
+     * @return
+     */
+    public int missingNumber(int[] nums) {
+        int l = 0, r = nums.length-1, mid = 0;
+        while(l < r){
+            mid = l + (r-l)>>1;
+            if(nums[mid] == mid)
+                l = mid+1;
+            else
+                r = mid-1;
+        }
+        return nums[l] == l ? nums[l]+1 : nums[l]-1;
+    }
+
+    /**
      * 面试题57 和为s的两个数
      * 双指针法
      * @param nums
