@@ -2334,6 +2334,30 @@ public class LeetCodes {
 		return hasPathSum(root.left, sum) || hasPathSum(root.right, sum);
 	}
 
+    /**
+     * 113 路径总和Ⅱ
+     */
+    List<List<Integer>> res_34 = new ArrayList<>();
+    List<Integer> temp_34 = new ArrayList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        if(root == null)
+            return res_34;
+        sum -= root.val;
+        temp_34.add(root.val);
+        //如果为叶子节点
+        if(root.left == null && root.right == null){
+            if(sum == 0){
+                res_34.add(new ArrayList<>(temp_34));
+            }
+        }
+        if(root.left != null)
+            pathSum(root.left, sum);
+        if(root.right != null)
+            pathSum(root.right, sum);
+        temp_34.remove(temp_34.size()-1);
+        return res_34;
+    }
+
 	/**
 	 * 114 二叉树转化为链表
 	 * 使用后序遍历
