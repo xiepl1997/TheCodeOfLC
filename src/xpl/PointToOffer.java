@@ -802,5 +802,25 @@ public class PointToOffer {
         return res;
     }
 
-    
+    /**
+     * 面试题50 第一个只出现一次的字符
+     * 例如 abaccdeff，返回 b
+     * @param s
+     * @return
+     */
+    public char firstUniqChar(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        for(char c:s.toCharArray()){
+            if(map.containsKey(c))
+                map.put(c, map.get(c)+1);
+            else
+                map.put(c, 1);
+        }
+        for(char c:s.toCharArray()){
+            if(map.get(c) == 1)
+                return c;
+        }
+        return ' ';
+    }
+
 }
