@@ -848,6 +848,33 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题53-1 在排序数组中查找数字
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int search(int[] nums, int target) {
+        int l = 0, r = nums.length-1, mid = 0;
+        int count = 0;
+        while(l <= r){
+            mid = l + (r - l)/2;
+            if(nums[mid] == target){
+                count++;
+                int t = mid;
+                while(++t <= nums.length-1 && nums[t] == target) count++;
+                t = mid;
+                while(--t >= 0 && nums[t] == target) count++;
+                break;
+            }
+            else if(nums[mid] < target)
+                l = mid+1;
+            else
+                r = mid-1;
+        }
+        return count;
+    }
+
+    /**
      * 面试题57 和为s的两个数
      * 双指针法
      * @param nums
