@@ -846,4 +846,24 @@ public class PointToOffer {
         }
         return l1;
     }
+
+    /**
+     * 面试题57 和为s的两个数
+     * 双指针法
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] nums, int target) {
+        int l = 0, r = nums.length-1;
+        while(true){
+            if(nums[l] + nums[r] > target)
+                r--;
+            else if(nums[l] + nums[r] < target)
+                l++;
+            else
+                break;
+        }
+        return new int[]{nums[l], nums[r]};
+    }
 }
