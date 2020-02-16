@@ -1435,9 +1435,29 @@ public class LeetCodes {
 	 * @param intervals
 	 * @return
 	 */
-//	public int[][] merge(int[][] intervals) {
-//
-//	}
+	public int[][] merge(int[][] intervals) {
+		Comparator<int[]> comparator = new Comparator<int[]>() {
+			@Override
+			public int compare(int[] a, int[] b) {
+				return a[0] == b[0] ? a[1]-b[1] : a[0]-b[0];
+			}
+		};
+
+		List<int[]> list = new ArrayList<>();
+
+		Arrays.sort(intervals, comparator);
+		for(int i = 0; i < intervals.length; i++){
+			int left = intervals[i][0];
+			int right = intervals[i][1];
+			while(i < intervals.length-1 && intervals[i+1][0] >= left && intervals[i+1][0] <= right ){
+				right = Math.max(right, intervals[i+1][1]);
+				i++;
+			}
+			list.add(new int[]{left, right});
+		}
+		return list.toArray(new int[list.size()][2]);
+
+	}
 
 	/**
 	 * 58 最后一个单词的长度
