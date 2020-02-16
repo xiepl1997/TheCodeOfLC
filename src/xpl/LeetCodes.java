@@ -1,5 +1,7 @@
 package xpl;
 
+import javafx.scene.layout.Priority;
+
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -3868,6 +3870,37 @@ public class LeetCodes {
         }
         return max;
     }
+
+	/**
+	 * 5343 多次求和构造目标函数
+	 * @param target
+	 * @return
+	 */
+	public boolean isPossible(int[] target) {
+		long sum = 0;
+		Comparator<Long> comparator = new Comparator<Long>() {
+			@Override
+			public int compare(Long aLong, Long t1) {
+				return (int)(t1-aLong);
+			}
+		};
+		Queue<Long> queue = new PriorityQueue<>(target.length, comparator);
+		for(long x: target){
+			sum += x;
+			queue.add(x);
+		}
+
+		while(queue.peek() > 1){
+			long mx = queue.poll();
+			long delta = sum - mx;
+			if(mx <= delta)
+				return false;
+			mx -= delta;
+			sum -= delta;
+			queue.add(mx);
+		}
+		return true;
+	}
 
 
 }
