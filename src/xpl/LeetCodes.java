@@ -1848,6 +1848,49 @@ public class LeetCodes {
 		return false;
 	}
 
+	/**
+	 * 75 颜色分类（荷兰国旗问题）
+	 * @param nums
+	 */
+	public void sortColors(int[] nums) {
+//		使用两趟扫描方法，重写数组
+//		int i = 0, j = 0, z = 0;
+//		for(int p = 0; p < nums.length; p++){
+//			if(nums[p] == 0)
+//				i++;
+//			else if(nums[p] == 1)
+//				j++;
+//			else
+//				z++;
+//		}
+//		int p = 0;
+//		for(;p < p+i; p++)
+//			nums[p] = 0;
+//		for(;p < p+j; p++)
+//			nums[p] = 1;
+//		for(;p < p+z; p++)
+//			nums[p] = 2;
+
+//		使用常数空间，扫描一趟，双指针
+		int p1 = 0, p2 = nums.length-1;
+		int cur = 0;
+		int temp;
+		while(cur <= p2){
+			//如果为0，则与p1交换
+			if(nums[cur] == 0){
+				temp = nums[cur];
+				nums[cur++] = nums[p1];
+				nums[p1++] = temp;
+			}
+			else if(nums[cur] == 2){
+				temp = nums[cur];
+				nums[cur] = nums[p2];
+				nums[p2--] = temp;
+			}
+			else cur++;
+		}
+	}
+
     /**
      * 78 子集，递归算法
      * @param nums
