@@ -3872,6 +3872,49 @@ public class LeetCodes {
     }
 
 	/**
+	 * 5342 最多可以参加的会议数目
+	 * @param events
+	 * @return
+	 */
+	public int maxEvents(int[][] events) {
+		Queue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
+			@Override
+			public int compare(int[] a, int[] b) {
+				return a[0] - b[0]!=0?a[0]-b[0]:a[1]-b[1];
+			}
+		});
+		for(int i =0 ; i < events.length; i++)
+			queue.add(events[i]);
+		int cnt = 0;
+		int cur = 0;
+		while(!queue.isEmpty()){
+			int[] temp = queue.poll();
+			if(cur < temp[0]){
+				cnt++;
+				cur = temp[0]+1;
+			}
+			else if(cur >= temp[0] && cur <= temp[1]){
+				cnt++;
+				cur++;
+			}
+			//重新计算优先级
+			while(!queue.isEmpty()){
+				temp = queue.poll();
+				if(cur > temp[0]){
+					temp[0] = cur;
+					if(temp[1] >= temp[0])
+						queue.add(temp);
+				}
+				else if(cur <= temp[0]){
+					queue.add(temp);
+					break;
+				}
+			}
+		}
+		return cnt;
+	}
+
+	/**
 	 * 5343 多次求和构造目标函数
 	 * @param target
 	 * @return
