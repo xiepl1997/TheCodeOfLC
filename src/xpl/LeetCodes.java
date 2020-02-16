@@ -1891,6 +1891,31 @@ public class LeetCodes {
 		}
 	}
 
+	/**
+	 * 77 组合
+	 * @param n
+	 * @param k
+	 * @return
+	 */
+	public List<List<Integer>> combine(int n, int k) {
+		List<List<Integer>> res = new ArrayList<>();
+		if(k > n)
+			return res;
+		dg_77(0, res, new ArrayList<>(), n, k);
+		return res;
+	}
+	public void dg_77(int index, List<List<Integer>> res, List<Integer> temp, int n, int k){
+		if(temp.size() == k) {
+			res.add(new ArrayList<>(temp));
+			return;
+		}
+		for(int i = index; i < n; i++){
+			temp.add(i + 1);
+			dg_77(i + 1, res, temp, n, k);
+			temp.remove(temp.size() - 1);
+		}
+	}
+
     /**
      * 78 子集，递归算法
      * @param nums
