@@ -892,6 +892,37 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题55-1 二叉树的最大深度
+     * @param root
+     * @return
+     */
+    public int maxDepth(TreeNode root) {
+        if(root == null)
+            return 0;
+        int ld = maxDepth(root.left);
+        int rd = maxDepth(root.right);
+        if(ld < rd)
+            return rd + 1;
+        else
+            return ld + 1;
+    }
+
+    /**
+     * 面试题55-2 判断是否是平衡二叉树
+     * @param root
+     * @return
+     */
+    public boolean isBalanced(TreeNode root) {
+        if(root == null)
+            return true;
+        int k = Math.abs(maxDepth(root.left) - maxDepth(root.right));
+        if(k <= 1 && isBalanced(root.left) && isBalanced(root.right))
+            return true;
+        else
+            return false;
+    }
+
+    /**
      * 面试题57 和为s的两个数
      * 双指针法
      * @param nums
@@ -909,5 +940,24 @@ public class PointToOffer {
                 break;
         }
         return new int[]{nums[l], nums[r]};
+    }
+
+    /**
+     * 面试题58-1 翻转单词顺序
+     * @param s
+     * @return
+     */
+    public String reverseWords(String s) {
+        if(s == null || s.length()==0)
+            return "";
+        s = s.trim();
+        String[] g = s.split(" ");
+        StringBuilder sb = new StringBuilder();
+        sb.append(g[g.length-1]);
+        for(int i = g.length-2; i >= 0; i--){
+            if(!g[i].trim().equals(" "))
+                sb.append(" "+g[i].trim());
+        }
+        return sb.toString();
     }
 }
