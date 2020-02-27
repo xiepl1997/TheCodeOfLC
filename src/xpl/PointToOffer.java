@@ -960,4 +960,27 @@ public class PointToOffer {
         }
         return sb.toString();
     }
+
+    /**
+     * 面试题68-2 二叉树的最近公共祖先
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null)
+            return root;
+        if(root == p || root == q)
+            return root;
+        TreeNode ln = lowestCommonAncestor(root.left, p, q);
+        TreeNode rn = lowestCommonAncestor(root.right, p, q);
+        if(ln != null && rn != null)
+            return root;
+        if(ln != null)
+            return ln;
+        if(rn != null)
+            return rn;
+        return null;
+    }
 }
