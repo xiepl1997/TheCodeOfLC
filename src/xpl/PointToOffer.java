@@ -962,6 +962,20 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题58-2 左旋转字符串
+     * @param s
+     * @param n
+     * @return
+     */
+    public String reverseLeftWords(String s, int n) {
+        if(n >= s.length())
+            return s;
+        String s1 = s.substring(0, n);
+        String s2 = s.substring(n);
+        return s2+s1;
+    }
+
+    /**
      * 面试题68-2 二叉树的最近公共祖先
      * @param root
      * @param p
