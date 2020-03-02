@@ -976,6 +976,25 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题62 圆圈中最后剩下的数字
+     * 方法一：采用链表
+     * @param n
+     * @param m
+     * @return
+     */
+    public int lastRemaining(int n, int m) {
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < n; i++)
+            list.add(i);
+        int c = (m-1)%n;
+        while(list.size() != 1){
+            list.remove(c);
+            c = (c+m-1)%list.size();
+        }
+        return list.get(0);
+    }
+
+    /**
      * 面试题68-2 二叉树的最近公共祖先
      * @param root
      * @param p
