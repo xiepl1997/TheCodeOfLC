@@ -5,6 +5,9 @@ import org.w3c.dom.NodeList;
 import java.lang.reflect.Array;
 import java.util.*;
 
+/**
+ * 剑指offer
+ */
 public class PointToOffer {
     /**
      * 面试题3 数组中重复的数字
