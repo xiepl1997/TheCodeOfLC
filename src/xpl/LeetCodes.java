@@ -3868,6 +3868,58 @@ public class LeetCodes {
         return j == len;
     }
 
+    /**
+     * 994 腐烂的橘子
+     * 多源广度优先
+     */
+    class Orange{
+        int x;
+        int y;
+        public Orange(int x,int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+    public int orangesRotting(int[][] grid) {
+        int r = grid.length;
+        int c = grid[0].length;
+        Queue<Orange> queue = new ArrayDeque<>();
+        for(int i = 0; i < r; i++){
+            for(int j = 0; j < c; j++){
+                if(grid[i][j] == 2)
+                    queue.add(new Orange(i, j));
+            }
+        }
+        int count = 0;
+        int[] posx = new int[]{1,0,-1,0};
+        int[] posy = new int[]{0,1,0,-1};
+        while(!queue.isEmpty()){
+            int flag = 0;
+            int size = queue.size();
+            for(int i = 0; i < size; i++){
+                Orange orange = queue.poll();
+                for(int j = 0; j < 4; j++){
+                    if(orange.x+posx[j] < 0 || orange.x+posx[j] >= r ||
+                        orange.y+posy[j] < 0 || orange.y+posy[j] >= c ||
+                        grid[orange.x+posx[j]][orange.y+posy[j]] != 1)
+                        continue;
+                    grid[orange.x+posx[j]][orange.y+posy[j]] = 2;
+                    queue.add(new Orange(orange.x+posx[j],orange.y+posy[j]));
+                    flag = 1;
+                }
+            }
+            if(flag == 1)
+                count++;
+        }
+        for(int i = 0; i < r; i++){
+            for(int j = 0; j < c; j++){
+                if(grid[i][j] == 1)
+                    return -1;
+            }
+        }
+        return count;
+    }
+
 	/**
 	 * 997 小镇的法官
 	 * @param N
@@ -4057,6 +4109,8 @@ class TreeNode{
 		val = x;
 	}
 }
+
+
 
 
 
