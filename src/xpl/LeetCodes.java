@@ -3941,6 +3941,34 @@ public class LeetCodes {
 		return -1;
 	}
 
+    /**
+     * 1103 分糖果Ⅱ
+     * @param candies
+     * @param num_people
+     * @return
+     */
+    public int[] distributeCandies(int candies, int num_people) {
+        int[] res = new int[num_people];
+        if(num_people == 0)
+            return res;
+        int index = 0;
+        int temp = 1;
+        while(candies > 0){
+            if(index == num_people)
+                index = 0;
+
+            if(candies - temp > 0){
+                res[index++] += temp;
+            }
+            else{
+                res[index++] += candies;
+            }
+            candies -= temp;
+            temp++;
+        }
+        return res;
+    }
+
 	/**
 	 * 1207 独一无二的出现次数
 	 * @param arr
