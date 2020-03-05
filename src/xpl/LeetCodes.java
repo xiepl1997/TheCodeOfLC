@@ -2126,6 +2126,35 @@ public class LeetCodes {
 		return result;
 	}
 
+    /**
+     * 98 验证二叉搜索树（二叉排序树）
+     * 检查二叉树的中序遍历是否是升序
+     * @param root
+     * @return
+     */
+    public boolean isValidBST(TreeNode root) {
+        if(root == null)
+            return true;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode t = root;
+        double temp = -Double.MAX_VALUE; //临时值，保留上一个值
+        while(t != null || !stack.isEmpty()){
+            if(t != null){
+                stack.push(t);
+                t = t.left;
+            }
+            else{
+                t = stack.pop();
+                if(temp < t.val)
+                    temp = (double)t.val;
+                else
+                    return false;
+                t = t.right;
+            }
+        }
+        return true;
+    }
+
 	/**
 	 * 100 相同的树
 	 * @param p
