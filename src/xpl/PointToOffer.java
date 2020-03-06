@@ -974,6 +974,42 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题57-Ⅱ 和为s的连续整数序列
+     * 双指针
+     * @param target
+     * @return
+     */
+    public int[][] findContinuousSequence(int target) {
+        int temp = 0;
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i = 1,j = 2 ; i < j;){
+            temp = (i + j)*(j - i + 1)/2;
+            if(temp == target){
+                int s = i;
+                List<Integer> l = new ArrayList<>();
+                while(s <= j){
+                    l.add(s);
+                    s++;
+                }
+                res.add(l);
+                i++;
+            }
+            else if(temp > target)
+                i++;
+            else
+                j++;
+        }
+        int[][] r = new int[res.size()][];
+        for(int i = 0; i < res.size(); i++){
+            r[i] = new int[res.get(i).size()];
+            for(int j = 0; j < res.get(i).size(); j++){
+                r[i][j] = res.get(i).get(j);
+            }
+        }
+        return r;
+    }
+
+    /**
      * 面试题58-1 翻转单词顺序
      * @param s
      * @return
