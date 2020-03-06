@@ -3781,6 +3781,31 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 392 判断子序列
+	 * 判断s是否是t的子序列
+	 * s为abc，t为akgbdc，则返回true
+	 * 双指针
+	 * @param s
+	 * @param t
+	 * @return
+	 */
+	public boolean isSubsequence(String s, String t) {
+		int i = 0;
+		int j = 0;
+		while(i < s.length() && j < t.length()){
+			if(s.charAt(i) == t.charAt(j)){
+				i++;
+				j++;
+			}
+			else
+				j++;
+		}
+		if(i == s.length())
+			return true;
+		return false;
+	}
+
+	/**
 	 * 416 分割等和子集，给定一个只包含正整数的非空数组，问是否可以将这个数组分割成两个子集，使得两个子集的元素和相等
 	 * 分析：求得数组中是否存在加起来为sum/2的数
 	 * 01背包变形，将sum/2看成是背包容量，把nums中的每个值都看成是一个物品，例如nums[i] 就看成是第i个物品，它的体积是nums[i],
