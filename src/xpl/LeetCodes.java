@@ -3049,6 +3049,41 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 173 二叉搜索树迭代器
+     * next将返回二叉搜索树中的下一个最小的数
+	 * @param root
+	 */
+	int index_173  = 0; //记录当前节点索引
+    List<Integer> list_173 = new ArrayList<>(); //保存二叉搜索树的中序遍历
+	public void BSTIterator(TreeNode root) {
+        Stack<TreeNode> s = new Stack<>();
+        TreeNode t = root;
+        while(t!=null || !s.isEmpty()){
+            if(t != null){
+                s.add(t);
+                t = t.left;
+            }
+            else{
+                t = s.pop();
+                list_173.add(t.val);
+                t = t.right;
+            }
+        }
+	}
+
+	/** @return the next smallest number */
+	public int next() {
+        return list_173.get(index_173++);
+	}
+
+	/** @return whether we have a next smallest number */
+	public boolean hasNext() {
+        if(index_173 >= list_173.size())
+            return false;
+        return true;
+	}
+
+	/**
 	 * 181 超过经理收入的员工
 	 */
 	//select e.Name Employee from Employee e where e.Salary > (select Salary from Employee b where b.Id = e.ManagerId)
