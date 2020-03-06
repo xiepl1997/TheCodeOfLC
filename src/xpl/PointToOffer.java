@@ -923,6 +923,30 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题54 二叉搜索树的第K大节点
+     * @param root
+     * @param k
+     * @return
+     */
+    public int kthLargest(TreeNode root, int k) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode t = root;
+        while(t != null || !stack.isEmpty()){
+            if(t != null){
+                stack.push(t);
+                t = t.left;
+            }
+            else{
+                t = stack.pop();
+                list.add(t.val);
+                t = t.right;
+            }
+        }
+        return list.get(list.size() - k);
+    }
+
+    /**
      * 面试题55-1 二叉树的最大深度
      * @param root
      * @return
