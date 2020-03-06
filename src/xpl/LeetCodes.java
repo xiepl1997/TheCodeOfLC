@@ -3249,6 +3249,39 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 221 最大的正方形
+	 * 给一个矩阵，数据有0和1，找出1组成的最大的正方形，并返回其面积
+	 * 解法：动态规划。首先初始化一个和给出矩阵一样大的二维数组dp，初始化为0，dp[i][j]存储以(i, j)为右下角节点的正方形的边长。
+	 * dp[i][j] = dp[i][j] = Math.min(Math.min(dp[i-1][j], dp[i][j-1]), dp[i-1][j-1]) + 1;
+	 * @param matrix
+	 * @return
+	 */
+	public int maximalSquare(char[][] matrix) {
+		if(matrix == null || matrix.length == 0)
+			return 0;
+		int[][] dp = new int[matrix.length][matrix[0].length];
+		int maxlength = 0;
+		//首先初始化第一行和第一列
+		for(int i = 0; i < matrix[0].length; i++){
+			dp[0][i] = matrix[0][i] - '0';
+			maxlength = maxlength < dp[0][i] ? dp[0][i] : maxlength;
+		}
+		for(int i = 0; i < matrix.length; i++){
+			dp[i][0] = matrix[i][0] - '0';
+			maxlength = maxlength < dp[i][0] ? dp[i][0] : maxlength;
+		}
+		for(int i = 1; i < matrix.length; i++){
+			for(int j = 1; j < matrix[0].length; j++){
+				if(matrix[i][j] == '1'){
+					dp[i][j] = Math.min(Math.min(dp[i-1][j], dp[i][j-1]), dp[i-1][j-1]) + 1;
+					maxlength = maxlength < dp[i][j] ? dp[i][j] : maxlength;
+				}
+			}
+		}
+		return maxlength * maxlength;
+	}
+
+	/**
 	 * 223 矩形重叠的面积
 	 * (A,B) (C,D) (E,F) (G,H)为给出的四个点，计算重叠面积
 	 * 解析：首先判断是否有重叠，有的话直接返回两个矩形的面积之和，否则返回两个矩形的面积之和再减去重叠部分面积。
