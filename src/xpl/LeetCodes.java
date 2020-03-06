@@ -4195,6 +4195,27 @@ public class LeetCodes {
 		return searchBST(root.left, val);
 	}
 
+	/**
+	 * Insert into a Binary Search Tree
+	 * 在二叉搜索树中插入值
+	 * @param root
+	 * @param val
+	 * @return
+	 */
+	public TreeNode insertIntoBST(TreeNode root, int val) {
+		if(root.val > val && root.left == null)
+			root.left = new TreeNode(val);
+		else if(root.val < val && root.right == null)
+			root.right = new TreeNode(val);
+		else if(root.val > val){
+			insertIntoBST(root.left, val);
+		}
+		else{
+			insertIntoBST(root.right, val);
+		}
+		return root;
+	}
+
 }
 
 /**
