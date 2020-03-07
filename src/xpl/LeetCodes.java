@@ -3112,6 +3112,32 @@ public class LeetCodes {
 	and (e.Salary, e.DepartmentId) in (select max(Salary), DepartmentId from Employee group by DepartmentId)
 	 */
 
+    /**
+     * 189 旋转数组
+     * @param nums
+     * @param k
+     */
+    public void rotate(int[] nums, int k) {
+        if(nums.length == 1 || nums.length == 0)
+            return;
+        k = k % nums.length;
+        for(int i = 0, j = nums.length-1; i < j; i++, j--){
+            int temp = nums[j];
+            nums[j] = nums[i];
+            nums[i] = temp;
+        }
+        for(int i = 0, j = k-1; i < j; i++, j--){
+            int temp = nums[j];
+            nums[j] = nums[i];
+            nums[i] = temp;
+        }
+        for(int i = k, j = nums.length-1; i < j; i++, j--){
+            int temp = nums[j];
+            nums[j] = nums[i];
+            nums[i] = temp;
+        }
+    }
+
 	/**
 	 * 191 位1的个数
 	 * @param n

@@ -1067,6 +1067,40 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题59-Ⅱ 队列的最大值
+     */
+    List<Integer> list_59;
+    List<Integer> tail_59;
+    int max_59;
+    public void MaxQueue() {
+        list_59 = new ArrayList<>();
+        tail_59 = new ArrayList<>();
+        max_59 = Integer.MIN_VALUE;
+    }
+
+    public int max_value() {
+        if(list_59.size() == 0)
+            return -1;
+        return tail_59.get(tail_59.size() - 1);
+    }
+
+    public void push_back(int value) {
+        max_59 = max_59 > value ? max_59 : value;
+        list_59.add(value);
+        tail_59.add(max_59);
+    }
+
+    public int pop_front() {
+        if(list_59.size() == 0)
+            return -1;
+        int res = list_59.remove(0);
+        if(res == tail_59.get(tail_59.size()-1)){
+            tail_59.remove(tail_59.size()-1);
+        }
+        return res;
+    }
+
+    /**
      * 面试题62 圆圈中最后剩下的数字
      * 方法一：采用链表
      * @param n
