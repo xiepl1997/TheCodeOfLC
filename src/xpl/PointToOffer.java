@@ -1071,33 +1071,31 @@ public class PointToOffer {
      */
     List<Integer> list_59;
     List<Integer> tail_59;
-    int max_59;
     public void MaxQueue() {
         list_59 = new ArrayList<>();
         tail_59 = new ArrayList<>();
-        max_59 = Integer.MIN_VALUE;
     }
 
     public int max_value() {
         if(list_59.size() == 0)
             return -1;
-        return tail_59.get(tail_59.size() - 1);
+        return tail_59.get(0);
     }
 
     public void push_back(int value) {
-        max_59 = max_59 > value ? max_59 : value;
+        for(int i = 0; i < tail_59.size(); i++){
+            if(tail_59.get(i) < value)
+                tail_59.set(i, value);
+        }
+        tail_59.add(value);
         list_59.add(value);
-        tail_59.add(max_59);
     }
 
     public int pop_front() {
         if(list_59.size() == 0)
             return -1;
-        int res = list_59.remove(0);
-        if(res == tail_59.get(tail_59.size()-1)){
-            tail_59.remove(tail_59.size()-1);
-        }
-        return res;
+        tail_59.remove(0);
+        return list_59.remove(0);
     }
 
     /**
