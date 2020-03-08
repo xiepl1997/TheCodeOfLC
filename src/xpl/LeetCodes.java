@@ -3612,6 +3612,27 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 322 零钱兑换（动态规划）
+	 * @param coins
+	 * @param amount
+	 * @return
+	 */
+	public int coinChange(int[] coins, int amount) {
+		int[] dp = new int[amount+1];
+		for(int i = 0; i < amount+1; i++)
+			dp[i] = amount + 1;
+		dp[0] = 0;
+		for(int i = 0; i < dp.length; i++){
+			for(int coin : coins){
+				if(i - coin < 0)
+					continue;
+				dp[i] = Math.min(dp[i], 1 + dp[i-coin]);
+			}
+		}
+		return dp[amount] == amount+1 ? -1 : dp[amount];
+	}
+
+	/**
 	 * 334 递增的三元子序列
 	 * 分析：初始化a、b为无穷大，然后遍历nums数组，首先判断nums[i]是否小于a，如果小于a，则a=nums[i]，否则与b比较，如果比b小，则
 	 * b=nums[i]，否则返回true。b若被赋值，说明在b这个值之前肯定有比b小的数。当nums[i]小于被赋值的b时，就说明存在递增的三元子序列
