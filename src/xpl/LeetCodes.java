@@ -4110,6 +4110,31 @@ public class LeetCodes {
 		return -1;
 	}
 
+	/**
+	 * 1013 将数组分成h和相等的三个部分
+	 * @param A
+	 * @return
+	 */
+	public boolean canThreePartsEqualSum(int[] A) {
+		int sum = 0;
+		for(int i = 0; i < A.length; i++){
+			sum += A[i];
+		}
+		if(sum % 3 != 0)
+			return false;
+		int t = sum / 3;
+		int temp = 0;
+		int count = 0;
+		for(int i = 0; i < A.length; i++){
+			temp += A[i];
+			if(temp == t){
+				temp = 0;
+				count++;
+			}
+		}
+		return count == 3;
+	}
+
     /**
      * 1103 分糖果Ⅱ
      * @param candies
