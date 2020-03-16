@@ -4219,6 +4219,31 @@ public class LeetCodes {
     }
 
 	/**
+	 * 1160 拼写单词
+	 * @param words
+	 * @param chars
+	 * @return
+	 */
+	public int countCharacters(String[] words, String chars) {
+		int[] c = new int[26];
+		for(char ch : chars.toCharArray()){
+			c[ch-'a'] ++;
+		}
+		int res = 0;
+		a:for(String s : words){
+			int[] w = new int[26];
+			for(char ch : s.toCharArray())
+				w[ch-'a']++;
+			for(int i = 0; i < 26; i++){
+				if(w[i] > c[i])
+					continue a;
+			}
+			res += s.length();
+		}
+		return res;
+	}
+
+	/**
 	 * 1207 独一无二的出现次数
 	 * @param arr
 	 * @return
