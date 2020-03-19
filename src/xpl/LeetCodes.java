@@ -3853,6 +3853,27 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 409 最长回文串
+	 * @param s
+	 * @return
+	 */
+	public int longestPalindrome_409(String s) {
+		Set<Character> set = new HashSet<>();
+		int len = 0;
+		for(char ch : s.toCharArray()){
+			if(!set.contains(ch))
+				set.add(ch);
+			else{
+				set.remove(ch);
+				len += 2;
+			}
+		}
+		if(!set.isEmpty())
+			len++;
+		return len;
+	}
+
+	/**
 	 * 416 分割等和子集，给定一个只包含正整数的非空数组，问是否可以将这个数组分割成两个子集，使得两个子集的元素和相等
 	 * 分析：求得数组中是否存在加起来为sum/2的数
 	 * 01背包变形，将sum/2看成是背包容量，把nums中的每个值都看成是一个物品，例如nums[i] 就看成是第i个物品，它的体积是nums[i],
@@ -4056,6 +4077,18 @@ public class LeetCodes {
                 dfs_695(i+x_695[k], j+y_695[k], grid);
         }
     }
+
+	/**
+	 * 836 矩形重叠
+	 * @param rec1
+	 * @param rec2
+	 * @return
+	 */
+	public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
+		if(rec1[0] >= rec2[2] || rec1[2] <= rec2[0] || rec1[1] >= rec2[3] || rec1[3] <= rec2[1])
+			return false;
+		return true;
+	}
 
     /**
      * 946 验证栈序列
