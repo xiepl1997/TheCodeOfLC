@@ -3757,6 +3757,21 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 365 水壶问题
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return
+	 */
+	public boolean canMeasureWater(int x, int y, int z) {
+		if(x + y < z)
+			return false;
+		if(x == 0 || y == 0)
+			return z == 0 || x + y == z;
+		return z % gcd(x, y) == 0;
+	}
+
+	/**
 	 * 374 猜数字大小
 	 * @param n
 	 * @return
