@@ -53,4 +53,30 @@ public class GoldBook {
                 A[z] = A[i--];
         }
     }
+
+    /**
+     * 面试题 17.16 按摩师
+     * @param nums
+     * @return
+     */
+    public int massage(int[] nums) {
+        if(nums.length == 0)
+            return 0;
+        if(nums.length == 1)
+            return nums[0];
+        if(nums.length == 2)
+            return nums[0] > nums[1] ? nums[0] : nums[1];
+        int[] p = new int[nums.length];
+        p[0] = nums[0];
+        p[1] = nums[1];
+        int max = Math.max(p[0], p[1]);
+        for(int i = 2; i < nums.length; i++){
+            if(i == 2)
+                p[i] = p[0] + nums[i];
+            else
+                p[i] = Math.max(nums[i]+p[i-2], nums[i]+p[i-3]);
+            max = max > p[i] ? max : p[i];
+        }
+        return max;
+    }
 }
