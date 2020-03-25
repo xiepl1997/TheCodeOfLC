@@ -4127,6 +4127,29 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 892 三维形体的表面积
+	 * @param grid
+	 * @return
+	 */
+	public int surfaceArea(int[][] grid) {
+		if(grid == null || grid.length == 0)
+			return 0;
+		int res = 0;
+		for(int i = 0; i < grid.length; i++){
+			for(int j = 0; j < grid.length; j++){
+				if(grid[i][j] != 0)
+					res += 6*grid[i][j]-2*(grid[i][j]-1);
+				if(j-1>0){
+					res -= Math.min(grid[i][j-1], grid[i][j])*2;
+				}
+				if(i-1>0)
+					res -= Math.min(grid[i-1][j], grid[i][j])*2;
+			}
+		}
+		return res;
+	}
+
+	/**
 	 * 945 使数组唯一的最小增量
 	 * @param A
 	 * @return
