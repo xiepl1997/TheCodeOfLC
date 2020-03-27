@@ -4150,6 +4150,28 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 914 卡牌分组
+	 * @param deck
+	 * @return
+	 */
+	public boolean hasGroupsSizeX(int[] deck) {
+		int[] a = new int[10000];
+		for(int i = 0; i < deck.length; i++){
+			a[deck[i]]++;
+		}
+		int s = 0;
+		for(int i = 0; i < 10000; i++){
+			s = gcd_914(s, a[i]);
+			if(s == 1)
+				return false;
+		}
+		return s >= 2;
+	}
+	public int gcd_914(int x, int y){
+		return y == 0 ? x : gcd(y, x % y);
+	}
+
+	/**
 	 * 945 使数组唯一的最小增量
 	 * @param A
 	 * @return
