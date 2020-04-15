@@ -3943,6 +3943,48 @@ public class LeetCodes {
     }
 
 	/**
+	 * 542 01矩阵 BFS
+	 * @param matrix
+	 * @return
+	 */
+	public int[][] updateMatrix(int[][] matrix) {
+		int[][] res = null;
+		if(matrix == null || matrix.length == 0)
+			return res;
+		int m = matrix.length;
+		int n = matrix[0].length;
+		res = new int[m][n];
+		int[][] visited = new int[m][n];
+		Queue<int[]> queue = new LinkedList<>();
+		for(int i = 0; i < m; i++){
+			for(int j = 0; j < n; j++){
+				if(matrix[i][j] == 0) {
+					queue.add(new int[]{i, j});
+					visited[i][j] = 1;
+				}
+			}
+		}
+		int[] x = new int[]{0, 1, -1, 0};
+		int[] y = new int[]{1, 0, 0, -1};
+		while(!queue.isEmpty()){
+			int size = queue.size();
+			for(int i = 0; i < size; i++){
+				int[] top = queue.poll();
+				for(int j = 0; j < 4; j++){
+					int newX = top[0] + x[j];
+					int newY = top[1] + y[j];
+					if(newX < 0 || newX >= m || newY < 0 || newY >=n || visited[newX][newY] == 1 )
+						continue;
+					visited[newX][newY] = 1;
+					res[newX][newY] = res[top[0]][top[1]] + 1;
+					queue.add(new int[]{newX, newY});
+				}
+			}
+		}
+		return res;
+	}
+
+	/**
 	 * 543 二叉树的直径
 	 * 二叉树的直径就是任意两个节点路径长度中的最大值，这条路径可以穿过根节点
 	 * 解析：二叉树的直径可以理解为以每个节点作为根节点取其中的左子树的最大深度和右子树的最大深度之和
@@ -4092,6 +4134,15 @@ public class LeetCodes {
                 dfs_695(i+x_695[k], j+y_695[k], grid);
         }
     }
+
+	/**
+	 * 820 单词的压缩编码
+	 * @param words
+	 * @return
+	 */
+	public int minimumLengthEncoding(String[] words) {
+
+	}
 
 	/**
 	 * 836 矩形重叠
@@ -4373,6 +4424,22 @@ public class LeetCodes {
 			res += s.length();
 		}
 		return res;
+	}
+
+	/**
+	 * 1162 地图分析
+	 * @param grid
+	 * @return
+	 */
+	public int maxDistance(int[][] grid) {
+		int max = -1;
+		if(grid == null || grid.length == 0)
+		for(int i = 0; i < grid.length; i++){
+			for(int j = 0; j < grid[0].length; j++){
+
+			}
+		}
+		return max;
 	}
 
 	/**
