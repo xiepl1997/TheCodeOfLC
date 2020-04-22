@@ -3176,6 +3176,30 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 199 二叉树的右视图
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> rightSideView(TreeNode root) {
+		List<Integer> res = new ArrayList<>();
+		if(root == null)
+			return res;
+		Queue<TreeNode> queue = new LinkedList<>();
+		queue.add(root);
+		while(!queue.isEmpty()){
+			int len = queue.size();
+			for(int i = 0; i < len; i++) {
+				TreeNode node = queue.poll();
+				if(i == len-1)
+					res.add(node.val);
+				if(node.left != null) queue.add(node.left);
+				if(node.right != null) queue.add(node.right);
+			}
+		}
+		return res;
+	}
+
+	/**
 	 * 200 岛屿数量， dfs
 	 * @param grid
 	 * @return
