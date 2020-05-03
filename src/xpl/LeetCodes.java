@@ -3408,6 +3408,21 @@ public class LeetCodes {
 		return l1*w1 + l2*w2 - (right-left)*(top-down);
 	}
 
+	/**
+	 * 226 翻转二叉树
+	 * @param root
+	 * @return
+	 */
+	public TreeNode invertTree(TreeNode root) {
+		if(root == null)
+			return root;
+		TreeNode temp = root.left;
+		root.left = invertTree(root.right);
+		root.right = invertTree(temp);
+
+		return root;
+	}
+
     /**
      * 231 2 的幂
      * 检查n是否是2的幂
