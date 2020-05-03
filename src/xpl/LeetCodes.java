@@ -3406,6 +3406,23 @@ public class LeetCodes {
     }
 
 	/**
+	 * 235 二叉搜索树的最近公共祖先
+	 * @param root
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public TreeNode lowestCommonAncestors(TreeNode root, TreeNode p, TreeNode q) {
+		if(root == null)
+			return root;
+		if(root.val > p.val && root.val > q.val)
+			return lowestCommonAncestors(root.left, p, q);
+		if(root.val < p.val && root.val < q.val)
+			return lowestCommonAncestors(root.right, p, q);
+		return root;
+	}
+
+	/**
 	 * 236 二叉树的最近的公共祖先
 	 * @param root
 	 * @param p
