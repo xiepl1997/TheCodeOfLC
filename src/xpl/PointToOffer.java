@@ -1099,6 +1099,20 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题61 扑克中的顺子
+     * @param nums
+     * @return
+     */
+    public boolean isStraight(int[] nums) {
+
+        for(int i = 1,j = 0; i < nums.length; i++){
+            if(nums[i] != 0 && nums[i] <= nums[j++])
+                return false;
+        }
+        return true;
+    }
+
+    /**
      * 面试题62 圆圈中最后剩下的数字
      * 方法一：采用链表
      * @param n
@@ -1135,6 +1149,27 @@ public class PointToOffer {
             max = max > prices[i] - now ? max : prices[i]-now;
         }
         return max;
+    }
+
+    /**
+     * 面试题66 构建乘积数组
+     * @param a
+     * @return
+     */
+    public int[] constructArr(int[] a) {
+        if(a == null || a.length == 0)
+            return new int[0];
+        int[] b = new int[a.length];
+        b[0] = 1;
+        int temp = 1;
+        for(int i = 1; i < a.length; i++){
+            b[i] = b[i-1]*a[i-1];
+        }
+        for(int i = a.length-2; i >= 0; i--){
+            temp *= a[i+1];
+            b[i] *= temp;
+        }
+        return b;
     }
 
     /**
