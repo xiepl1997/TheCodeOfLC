@@ -1082,6 +1082,25 @@ public class LeetCodes {
 		}
 	}
 
+    /**
+     * 45 跳跃游戏Ⅱ
+     * @param nums
+     * @return
+     */
+    public int jump(int[] nums) {
+        int end = 0;
+        int max = 0;
+        int res = 0;
+        for(int i = 0; i < nums.length-1; i++){
+            max = max > nums[i]+i ? max : nums[i]+i;
+            if(i == end){
+                end = max;
+                res++;
+            }
+        }
+        return res;
+    }
+
 	/**
 	 * 46 全排列，采用回溯算法，深度搜索寻找所有结果
 	 * @param nums
