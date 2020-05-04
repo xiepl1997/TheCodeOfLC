@@ -1118,6 +1118,43 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题63 股票的最大利润
+     * @param prices
+     * @return
+     */
+    public int maxProfit63(int[] prices) {
+        if(prices == null || prices.length == 0)
+            return 0;
+        int max = 0;
+        int now = prices[0];
+        for(int i = 1; i < prices.length; i++){
+            if(now > prices[i]){
+                now = prices[i];
+                continue;
+            }
+            max = max > prices[i] - now ? max : prices[i]-now;
+        }
+        return max;
+    }
+
+    /**
+     * 面试题68-1 二叉搜索树的最近公共祖先
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor68(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null)
+            return root;
+        if(root.val > p.val && root.val > q.val)
+            return lowestCommonAncestor68(root.left, p, q);
+        if(root.val < p.val && root.val < q.val)
+            return lowestCommonAncestor68(root.right, p, q);
+        return root;
+    }
+
+    /**
      * 面试题68-2 二叉树的最近公共祖先
      * @param root
      * @param p
