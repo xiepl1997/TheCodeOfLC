@@ -2151,12 +2151,13 @@ public class LeetCodes {
      * @param root
      * @return
      */
+    //使用中序遍历，如果结果是递增的，则是二叉搜索树，否则不是
     public boolean isValidBST(TreeNode root) {
         if(root == null)
             return true;
         Stack<TreeNode> stack = new Stack<>();
         TreeNode t = root;
-        double temp = -Double.MAX_VALUE; //临时值，保留上一个值
+        long pre = -Long.MAX_VALUE;
         while(t != null || !stack.isEmpty()){
             if(t != null){
                 stack.push(t);
@@ -2164,8 +2165,8 @@ public class LeetCodes {
             }
             else{
                 t = stack.pop();
-                if(temp < t.val)
-                    temp = (double)t.val;
+                if(pre < t.val)
+                    pre = t.val;
                 else
                     return false;
                 t = t.right;

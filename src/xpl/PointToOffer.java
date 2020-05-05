@@ -1152,6 +1152,21 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题65 不用加减法乘除做加法，使用位运算实现加法
+     * @param a
+     * @param b
+     * @return
+     */
+    public int add(int a, int b) {
+        while(b != 0){
+            int temp = a;
+            a = a ^ b;
+            b = (temp & b) << 1;
+        }
+        return a;
+    }
+
+    /**
      * 面试题66 构建乘积数组
      * @param a
      * @return
