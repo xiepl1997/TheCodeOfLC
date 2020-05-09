@@ -4155,6 +4155,43 @@ public class LeetCodes {
 		return sb.reverse().toString();
 	}
 
+    /**
+     * 572 另一个树的子树easy
+     * @param s
+     * @param t
+     * @return
+     */
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        if(s == null)
+            return false;
+        if(t == null)
+            return true;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode temp = s;
+        while(temp != null || !stack.isEmpty()){
+            if(temp != null){
+                stack.push(temp);
+                temp = temp.left;
+            }
+            else{
+                temp = stack.pop();
+                if(temp.val == t.val && isSameTree572(temp, t))
+                    return true;
+                temp = temp.right;
+            }
+        }
+        return false;
+    }
+    public boolean isSameTree572(TreeNode s, TreeNode t){
+        if(s == null && t == null)
+            return true;
+        if(s == null || t == null)
+            return false;
+        if(s.val == t.val && isSameTree572(s.left, t.left) && isSameTree572(s.right, t.right))
+            return true;
+        return false;
+    }
+
 	/**
 	 * 658 找到k个最接近的数
 	 * @param arr
