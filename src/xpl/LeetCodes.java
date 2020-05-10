@@ -2884,22 +2884,43 @@ public class LeetCodes {
 	 * @return
 	 */
 	public List<Integer> postorderTraversal_2(TreeNode root) {
-		LinkedList<TreeNode> stack = new LinkedList<>();
-		LinkedList<Integer> res = new LinkedList<>();
+		//一个栈
+//		LinkedList<TreeNode> stack = new LinkedList<>();
+//		LinkedList<Integer> res = new LinkedList<>();
+//		if(root == null)
+//		    return res;
+//		stack.add(root);
+//		while(!stack.isEmpty()){
+//		    TreeNode t = stack.pollLast();
+//		    res.addFirst(t.val);
+//		    if(t.left != null){
+//		        stack.add(t.left);
+//            }
+//		    if(t.right != null){
+//		        stack.add(t.right);
+//            }
+//        }
+//        return res;
+
+		//两个栈
+		Stack<TreeNode> stack1 = new Stack<>();
+		Stack<TreeNode> stack2 = new Stack<>();
+		List<Integer> res = new ArrayList<>();
 		if(root == null)
-		    return res;
-		stack.add(root);
-		while(!stack.isEmpty()){
-		    TreeNode t = stack.pollLast();
-		    res.addFirst(t.val);
-		    if(t.left != null){
-		        stack.add(t.left);
-            }
-		    if(t.right != null){
-		        stack.add(t.right);
-            }
-        }
-        return res;
+			return res;
+		stack1.push(root);
+		while(!stack1.isEmpty()){
+			TreeNode temp = stack1.pop();
+			stack2.push(temp);
+			if(temp.left != null)
+				stack1.push(temp.left);
+			if(temp.right != null)
+				stack1.push(temp.right);
+		}
+		while(!stack2.isEmpty()){
+			res.add(stack2.pop().val);
+		}
+		return res;
 	}
 
 	/**
