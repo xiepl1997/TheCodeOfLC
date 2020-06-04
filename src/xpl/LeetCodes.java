@@ -4777,6 +4777,27 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 1431 拥有最多糖果的孩子
+	 * @param candies
+	 * @param extraCandies
+	 * @return
+	 */
+	public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+		List<Boolean> res = new ArrayList<>();
+		int max = -1;
+		for(int i = 0; i < candies.length; i++){
+			max = max < candies[i] ? candies[i] : max;
+		}
+		for(int i = 0; i < candies.length; i++){
+			if(candies[i] + extraCandies >= max)
+				res.add(true);
+			else
+				res.add(false);
+		}
+		return res;
+	}
+
+	/**
 	 * 插入一个5，使得整数N变为最大
 	 * @param N
 	 * @return
