@@ -695,6 +695,35 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 25 k个一组翻转链表
+	 * @param head
+	 * @param k
+	 * @return
+	 */
+	public ListNode reverseKGroup(ListNode head, int k) {
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		ListNode temp = head, curr = head,pre = dummy , later;
+		int len = 0;
+		while(temp != null){
+			len++;
+			temp = temp.next;
+		}
+		for(int i = 0; i < len / k; i++){
+			for(int j = 0; j < k-1; j++){
+				later = curr.next;
+				curr.next = curr.next.next;
+				later.next = pre.next;
+				pre.next = later;
+			}
+			pre = curr;
+			curr = pre.next;
+		}
+		return dummy.next;
+
+	}
+
+	/**
 	 * 26 删除排序数组中的重复项
 	 * @param nums
 	 * @return
@@ -3533,19 +3562,28 @@ public class LeetCodes {
 
 	/**
 	 * 238 除自身以外数组的乘积
+	 * 要求为复杂度为O(n)，利用两个数组L和R，L[i]保留nums[i]的前面的乘积，R[i]保留nums[i]之后的乘积
 	 * @param nums
 	 * @return
 	 */
 	public int[] productExceptSelf(int[] nums) {
-		int t = 1;
-		int[] result = new int[nums.length];
-		for(int i = 0; i < nums.length; i++){
-			t *= nums[i];
+		if(nums.length == 1)
+			return nums;
+		int[] res = new int[nums.length];
+		int[] L = new int[nums.length];
+		int[] R = new int[nums.length];
+		L[0] = 1;
+		R[nums.length - 1] = 1;
+		for(int i = 1; i < nums.length; i++){
+			L[i] = L[i-1] * nums[i-1];
+		}
+		for(int i = nums.length-2; i >= 0; i--){
+			R[i] = R[i+1] * nums[i+1];
 		}
 		for(int i = 0; i < nums.length; i++){
-			result[i] = t/nums[i];
+			res[i] = L[i] * R[i];
 		}
-		return result;
+		return res;
 	}
 
 	/**
@@ -4174,6 +4212,42 @@ public class LeetCodes {
 	private String vers(String s){
 		StringBuilder sb = new StringBuilder(s);
 		return sb.reverse().toString();
+	}
+
+	/**
+	 * 560 和为k的子数组
+	 * @param nums
+	 * @param k
+	 * @return
+	 */
+	public int subarraySum(int[] nums, int k) {
+		if(nums == null || nums.length == 0)
+			return 0;
+		int start = 0, end = 0, sum = nums[0];
+		int res = 0;
+		while(end < nums.length){
+			if(sum < k){
+				end++;
+				if(end < nums.length) {
+					sum += nums[end];
+				}
+			}
+			else if(sum == k){
+				res++;
+				sum -= nums[start];
+				start++;
+				end++;
+				if(end < nums.length)
+					sum += nums[end];
+
+			}
+			else{
+				sum -= nums[start];
+				start++;
+			}
+
+		}
+		return res;
 	}
 
     /**
