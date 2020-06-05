@@ -2074,6 +2074,24 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 84 柱状图中最大的矩形
+	 * @param heights
+	 * @return
+	 */
+	public int largestRectangleArea(int[] heights) {
+		if(heights == null || heights.length == 0)
+			return 0;
+		int max = 0;
+		for(int i = 0; i < heights.length; i++){
+			int l = i-1, r = i+1;
+			while(l>=0 && heights[l]>=heights[i]) l--;
+			while(r<=heights.length-1 && heights[r]>=heights[i]) r++;
+			max = max > (r-l)*heights[i] ? max : (r-l)*heights[i];
+		}
+		return max;
+	}
+
+	/**
 	 * 88 合并两个有序数组
 	 * @param nums1
 	 * @param m
@@ -3506,6 +3524,19 @@ public class LeetCodes {
         long x = (long)n;
         return (x & (x-1)) == 0;
     }
+
+	/**
+	 * 233 数字1的个数
+	 * @param n
+	 * @return
+	 */
+	public int countDigitOne(int n) {
+		int res = 0;
+		for(long i = 1; i <= n; i *= 10){
+			res += (n / (i*10)) * i + Math.min(Math.max(n%(i*10)-i+1, 0), i);
+		}
+		return res;
+	}
 
 	/**
 	 * 235 二叉搜索树的最近公共祖先
