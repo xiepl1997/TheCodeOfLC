@@ -484,6 +484,25 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题26 树的子结构
+     * @param A
+     * @param B
+     * @return
+     */
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if(A == null || B == null)
+            return false;
+        return isChild(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B);
+    }
+    //判断树B是不是树A的子结构，A和B有相同根
+    public Boolean isChild(TreeNode A, TreeNode B){
+        if(B == null)return true;
+        if(A == null)return false;
+        return A.val == B.val && isChild(A.left, B.left) && isChild(A.right, B.right);
+
+    }
+
+    /**
      * 面试题27 二叉树的镜像
      * 递归
      * @param root
@@ -744,6 +763,72 @@ public class PointToOffer {
             pathSum(root.right, sum);
         temp_34.remove(temp_34.size()-1);
         return res_34;
+    }
+
+    /**
+     * 面试题35 复杂链表的复制
+     * @param head
+     * @return
+     */
+    public Node copyRandomList(Node head) {
+        // /**
+        // * 哈希表的方法，时间复杂度O(n)，空间复杂度O(n)
+        // */
+        // if(head == null)
+        //     return head;
+        // //map中存的是原节点、拷贝节点的一个映射
+        // Map<Node, Node> map = new HashMap<>();
+        // for(Node cur = head; cur != null; cur = cur.next){
+        //     map.put(cur, new Node(cur.val));
+        // }
+        // //将拷贝节点组织成一个链表
+        // for(Node cur = head; cur != null; cur = cur.next){
+        //     map.get(cur).next = map.get(cur.next);
+        //     map.get(cur).random = map.get(cur.random);
+        // }
+
+        // return map.get(head);
+
+
+        /**
+         * 原地修改的方法，时间复杂度O(n)，空间复杂度O(1)
+         */
+        if(head == null)
+            return head;
+        //在每个节点的后面添加一个相同的节点
+        for(Node cur = head; cur != null; cur = cur.next){
+            Node newnode = new Node(cur.val);
+            newnode.next = cur.next;
+            cur.next = newnode;
+            cur = newnode;
+        }
+
+        //将random复制到新加入的节点
+        for(Node cur = head.next, pre = head; ; cur = cur.next.next, pre = pre.next.next){
+            if(pre.random == null)
+                cur.random = null;
+            else
+                cur.random = pre.random.next;
+            if(cur.next == null)
+                break;
+        }
+
+        Node res = head.next;
+        //如果只有一个节点
+        if(head.next.next == null){
+            head.next = null;
+            return res;
+        }
+        //将新节点连接起来，旧节点连接起来
+        for(Node cur = head.next, pre = head; cur.next != null; ){
+            pre.next = cur.next;
+            pre = pre.next;
+            cur.next = cur.next.next;
+            cur = cur.next;
+            if(cur.next == null)
+                pre.next = null;
+        }
+        return res;
     }
 
     /**
