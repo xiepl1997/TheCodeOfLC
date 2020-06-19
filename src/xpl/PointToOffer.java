@@ -919,6 +919,25 @@ public class PointToOffer {
     }
 
     /**
+     * 面试题48 最长不含重复字符的子字符串
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int maxlen = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        int index = 0;
+        for(int i = 0; i < s.length(); i++){
+            if(map.containsKey(s.charAt(i))){
+                index = Math.max(map.get(s.charAt(i)), index);
+            }
+            maxlen = Math.max(maxlen, i - index + 1);
+            map.put(s.charAt(i), i+1);
+        }
+        return maxlen;
+    }
+
+    /**
      * 面试题50 第一个只出现一次的字符
      * 例如 abaccdeff，返回 b
      * @param s
