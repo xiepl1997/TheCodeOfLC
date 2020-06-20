@@ -4079,6 +4079,27 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 404 左叶子之和
+	 * @param root
+	 * @return
+	 */
+	int res_404 = 0;
+	public int sumOfLeftLeaves(TreeNode root) {
+		if(root == null)
+			return 0;
+		if(root.left != null){
+			if(root.left.left == null && root.left.right == null){
+				res_404 += root.left.val;
+			}
+			else
+				sumOfLeftLeaves(root.left);
+		}
+		if(root.right != null)
+			sumOfLeftLeaves(root.right);
+		return res_404;
+	}
+
+	/**
 	 * 409 最长回文串
 	 * @param s
 	 * @return
