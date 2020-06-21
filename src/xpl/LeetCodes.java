@@ -4160,6 +4160,26 @@ public class LeetCodes {
 	}
 
     /**
+     * 453 最小移动次数使数组元素相等
+     *
+     * @param nums
+     * @return
+     */
+    public int minMoves(int[] nums) {
+        int min = Integer.MAX_VALUE;
+        int res = 0;
+        if(nums == null || nums.length == 0)
+            return 0;
+        for(int i = 0; i < nums.length; i++){
+            min = min < nums[i] ? min : nums[i];
+        }
+        for(int i = 0; i < nums.length; i++){
+            res += nums[i] - min;
+        }
+        return res;
+    }
+
+    /**
      * 509 斐波那契数
      * @param N
      * @return
