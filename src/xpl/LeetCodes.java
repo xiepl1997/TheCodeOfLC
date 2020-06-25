@@ -4359,6 +4359,33 @@ public class LeetCodes {
         return false;
     }
 
+
+	/**
+	 * 590 N叉树的后序遍历
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> postorder(Node root) {
+		List<Integer> res = new ArrayList<>();
+		if(root == null)
+			return res;
+		Stack<Node> stack1 = new Stack<>();
+		Stack<Node> stack2 = new Stack<>();
+		stack1.push(root);
+		List<Node> templist = null;
+		while(!stack1.isEmpty()){
+			Node t = stack1.pop();
+			stack2.push(t);
+			templist = t.children;
+			for(Node n : templist){
+				stack1.push(n);
+			}
+		}
+		while(!stack2.isEmpty())
+			res.add(stack2.pop().val);
+		return res;
+	}
+
 	/**
 	 * 658 找到k个最接近的数
 	 * @param arr
@@ -5026,6 +5053,21 @@ class TreeNode{
 		val = x;
 	}
 }
+class Node {
+	public int val;
+	public List<Node> children;
+
+	public Node() {}
+
+	public Node(int _val) {
+		val = _val;
+	}
+
+	public Node(int _val, List<Node> _children) {
+		val = _val;
+		children = _children;
+	}
+};
 
 
 
