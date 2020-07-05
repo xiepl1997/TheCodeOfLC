@@ -1,3 +1,2 @@
 # LC
-leetcode做题代码记录  
-为了方便都写在一个类里了。。。。
+the codes of lc
