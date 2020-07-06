@@ -3823,6 +3823,26 @@ public class LeetCodes {
 	}
 
 	/**
+	 * 303 区域和检索 - 数组不可变
+	 */
+	int[] dp_303 = null;
+	public NumArray_303(int[] nums) {
+		if(nums.length == 0)
+			return;
+		dp_303 = new int[nums.length];
+		dp_303[0] = nums[0];
+		for(int i = 1; i < nums.length; i++){
+			dp_303[i] = nums[i] + dp_303[i-1];
+		}
+	}
+
+	public int sumRange_303(int i, int j) {
+		if(i == 0)
+			return dp[j];
+		return dp[j] - dp[i-1];
+	}
+
+	/**
 	 * 322 零钱兑换（动态规划）
 	 * @param coins
 	 * @param amount
