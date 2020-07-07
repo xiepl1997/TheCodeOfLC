@@ -3835,11 +3835,41 @@ public class LeetCodes {
 			dp_303[i] = nums[i] + dp_303[i-1];
 		}
 	}
-
 	public int sumRange_303(int i, int j) {
 		if(i == 0)
-			return dp[j];
-		return dp[j] - dp[i-1];
+			return dp_303[j];
+		return dp_303[j] - dp_303[i-1];
+	}
+
+	/**
+	 * 304 二维区域和检测 - 矩阵不可变
+	 */
+	int[][] dp_304 = null;
+	public NumMatrix_304(int[][] matrix) {
+		if(matrix == null || matrix.length == 0)
+			return;
+		dp_304 = new int[matrix.length][matrix[0].length];
+		dp_304[0][0] = matrix[0][0];
+		for(int i = 1; i < matrix.length; i++)
+			dp_304[i][0] = matrix[i][0] + dp_304[i-1][0];
+		for(int i = 1; i < matrix[0].length; i++)
+			dp_304[0][i] = matrix[0][i] + dp_304[0][i-1];
+		for(int i = 1; i < matrix.length; i++){
+			for(int j = 1; j < matrix[0].length; j++){
+				dp_304[i][j] = matrix[i][j] + dp_304[i][j-1] + dp_304[i-1][j] - dp_304[i-1][j-1];
+			}
+		}
+	}
+
+	public int sumRegion_304(int row1, int col1, int row2, int col2) {
+		int sum = dp_304[row2][col2];
+		if(col1 != 0)
+			sum -= dp_304[row2][col1-1];
+		if(row1 != 0)
+			sum -= dp_304[row1-1][col2];
+		if(row1 != 0 && col1 != 0)
+			sum += dp_304[row1-1][col1-1];
+		return sum;
 	}
 
 	/**
